@@ -105,14 +105,18 @@
             await liff
                 .getProfile()
                 .then((profile) => {
-                    // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
-                    $("#pictureUrl").attr('src', profile.pictureUrl);
-                    $("#pictureUrlSrc").append(profile.pictureUrl);
-                    $("#userId").append(profile.userId);
-                    $("#statusMessage").append(profile.statusMessage);
-                    $("#displayName").append(profile.displayName);
-                    // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
-                    $("#decodedIDToken").append(liff.getDecodedIDToken().email);
+                    if (profile != null) {
+                        $("#displayName").append(profile.displayName);
+                        // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
+                        $("#pictureUrl").attr('src', profile.pictureUrl);
+                        $("#pictureUrlSrc").append(profile.pictureUrl);
+                        $("#userId").append(profile.userId);
+                        $("#statusMessage").append(profile.statusMessage);
+                        // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
+                        $("#decodedIDToken").append(liff.getDecodedIDToken().email);
+                    } else {
+                        alert("profile null");
+                    }
                 })
                 .catch((err) => {
                     alert("getProfile error : " + err);
@@ -136,7 +140,7 @@
                 $("#btnLogOut").css('display', 'none');
             }
             else {
-                // FALSE - 3 ปุมนี้ท่าไม่ได้ถ้าเปิดจาก external browser
+                // FALSE - 3 ปุมนี้ทำไม่ได้ถ้าเปิดจาก external browser
                 $("#btnMsg").css('display', 'none');
                 $("#btnScanCode").css('display', 'none');
                 $("#btnClose").css('display', 'none');
@@ -150,26 +154,26 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V27');
+                    $('#spVersion').text('V28');
                     getEnvironment();
-                    //getUserProfile();
+                    getUserProfile();
                     getContext();
 
-                    liff.getProfile().then((profile) => {
-                        if (profile != null) {
-                            $("#displayName").append(profile.displayName);
-                            $("#pictureUrl").attr('src', profile.pictureUrl);
-                            $("#pictureUrlSrc").append(profile.pictureUrl);
-                            $("#userId").append(profile.userId);
-                            $("#statusMessage").append(profile.statusMessage);
-                            $("#decodedIDToken").append(liff.getDecodedIDToken().email);
-                        } else {
-                            alert("profile null");
-                        }
-                    })
-                        .catch((err) => {
-                            alert("profile error :" + err);
-                        });
+                    //liff.getProfile().then((profile) => {
+                    //    if (profile != null) {
+                    //        $("#displayName").append(profile.displayName);
+                    //        $("#pictureUrl").attr('src', profile.pictureUrl);
+                    //        $("#pictureUrlSrc").append(profile.pictureUrl);
+                    //        $("#userId").append(profile.userId);
+                    //        $("#statusMessage").append(profile.statusMessage);
+                    //        $("#decodedIDToken").append(liff.getDecodedIDToken().email);
+                    //    } else {
+                    //        alert("profile null");
+                    //    }
+                    //})
+                    //    .catch((err) => {
+                    //        alert("profile error :" + err);
+                    //    });
 
                 })
                 .catch((err) => {
