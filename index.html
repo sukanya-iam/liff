@@ -14,6 +14,7 @@
     <p id="isInClient"><b>isInClient:</b> </p>
     <p id="accessToken"><b>AccessToken:</b> </p>
     <img id="pictureUrl">
+    <p id="pictureUrlSrc"><b>pictureUrl:</b> </p>
     <p id="userId"><b>userId:</b> </p>
     <p id="displayName"><b>displayName:</b> </p>
     <p id="statusMessage"><b>statusMessage:</b> </p>
@@ -88,6 +89,7 @@
             await liff.getProfile().then((profile) => {
                 // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
                 //$("#pictureurl").src = profile.pictureUrl;
+                $("#pictureUrlSrc").append(profile.pictureUrl);
                 $("#userId").append(profile.userId);
                 $("#statusMessage").append(profile.statusMessage);
                 $("#displayName").append(profile.displayName);
@@ -130,7 +132,7 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V23');
+                    $('#spVersion').text('V24');
                     getEnvironment();
                     //getUserProfile();
                     //getContext();
@@ -140,6 +142,7 @@
                             //if(profile.pictureUrl != null){
                             //$("#pictureurl").src = profile.pictureUrl;
                             //}
+                            $("#pictureUrlSrc").append(profile.pictureUrl);
                             $("#userId").append(profile.userId);
                             $("#statusMessage").append(profile.statusMessage);
                         } else {
