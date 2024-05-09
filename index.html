@@ -138,10 +138,10 @@ function getEnvironment() {
        //getContext();
     liff.getProfile()
   .then((profile) => {
-    alert("displayName", profile.displayName);
+    alert("displayName : " + profile.displayName);
   })
   .catch((err) => {
-    alert("profile " + err);
+    alert("profile error :" + err);
   });
      
   })
