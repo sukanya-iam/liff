@@ -133,11 +133,19 @@ function getEnvironment() {
   })
   .then(() => {
     // Start to use liff's api
-      $('#spVersion').text('VO9');
+      $('#spVersion').text('V10');
        $('#pOS').text('OS ' + liff.getOS());
        getEnvironment();
-       getUserProfile();
+       //getUserProfile();
        getContext();
+    liff
+  .getProfile()
+  .then((profile) => {
+    alert("displayName", profile.displayName);
+  })
+  .catch((err) => {
+    alert("error", err);
+  });
       // getFriendship()
       // createUniversalLink()
   })
