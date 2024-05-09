@@ -130,13 +130,13 @@ function getEnvironment() {
   })
   .then(() => {
     // Start to use liff's api
-      $('#spVersion').text('V16');
+      $('#spVersion').text('V16.1');
        //getEnvironment();
        //getUserProfile();
        //getContext();
     liff.getProfile().then((profile) => {
       document.getElementById("displayName").append(profile.displayName); 
-      if(profile.pictureUrl!= null){  
+      if(profile.pictureUrl != null){  
         document.getElementById("pictureurl").src = profile.pictureUrl; 
       }
        document.getElementById("userId").append(profile.userId);
