@@ -116,8 +116,9 @@ document.getElementById("btnclose").style.display = "none"
 }
 
     async function main() {
-      alert("My liffId: 2004905818-LqwOoRkn");
+      //alert("My liffId: 2004905818-LqwOoRkn");
       await liff.init({ liffId: "2004905818-LqwOoRkn" });
+      alert(liff.getos());
        getEnvironment();
        getUserProfile();
        getContext();
