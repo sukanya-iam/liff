@@ -90,7 +90,7 @@
      // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag 
        document.getElementById("pictureurl").src = profile.pictureUrl; 
        document.getElementById("userId").append(profile.userId);
-      document.getElementById("statusHessage").append(profile.statusMessage); 
+      document.getElementById("statusMessage").append(profile.statusMessage); 
       document.getElementById("displayName").append(profile.displayName); 
       // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย 
       document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email);
@@ -137,7 +137,7 @@ function getEnvironment() {
     liff.getProfile().then((profile) => {
       document.getElementById("pictureurl").src = profile.pictureUrl; 
        document.getElementById("userId").append(profile.userId);
-      document.getElementById("statusHessage").append(profile.statusMessage); 
+      document.getElementById("statusMessage").append(profile.statusMessage); 
       document.getElementById("displayName").append(profile.displayName); 
   })
   .catch((err) => {
