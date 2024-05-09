@@ -42,7 +42,7 @@
       var vConsole = new VConsole()
       console.log("Hello World!")
     </script> -->
-    <!-- <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
@@ -72,53 +72,54 @@
 
         function getContext() {
             // utou (1-on-1 chat), group, room, none(external browser)
-            document.getElementById("type").append(liff.getContext().type);
+            $("#type").append(liff.getContext().type);
             // compact, tall, full size
-            document.getElementById("viewType").append(liff.getContext().viewType);
+            $("#viewType").append(liff.getContext().viewType);
             // for 1-on-1 chat where liff was opened
-            document.getElementById("utouId").append(liff.getContext().utouId);
+            $("#utouId").append(liff.getContext().utouId);
             // for room chat where liff was opened
-            document.getElementById("roomId").append(liff.getContext().roomId);
+            $("#roomId").append(liff.getContext().roomId);
             // for group chat where liff was opened
-            document.getElementById("groupId").append(liff.getcontext().groupId);
+            $("#groupId").append(liff.getcontext().groupId);
         }
 
         async function getuserprofile() {
             //const profile = await liff.getProfile();
             await liff.getProfile().then((profile) => {
                 // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
-                //document.getElementById("pictureurl").src = profile.pictureUrl;
-                document.getElementById("userId").append(profile.userId);
-                document.getElementById("statusMessage").append(profile.statusMessage);
-                document.getElementById("displayName").append(profile.displayName);
+                //$("#pictureurl").src = profile.pictureUrl;
+                $("#userId").append(profile.userId);
+                $("#statusMessage").append(profile.statusMessage);
+                $("#displayName").append(profile.displayName);
                 // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
-                document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email);
+                $("#decodedIDToken").append(liff.getDecodedIDToken().email);
             })
                 .catch((err) => {
                     alert("getProfile error : " + err);
                 });
         }
+
         // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
         function getEnvironment() {
             // liff เปิดใน android, ios หรือ web
-            document.getElementById("os").append(liff.getOS());
+            $("#os").append(liff.getOS());
             // defualt language ของ client
-            document.getElementById("language").append(liff.getLanguage());
+            $("#language").append(liff.getLanguage());
             // version ของ liff ที่ถกเปิด
-            document.getElementById("version").append(liff.getVersion());
+            $("#version").append(liff.getVersion());
             // อันนี้เป็นค่าชั่วคราว เพื่อให้เรา access ไปที่หลังบ่านของ LINE ได้
-            document.getElementById("accessToken").append(liff.getAccessToken());
+            $("#accessToken").append(liff.getAccessToken());
             // ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
-            document.getElementById("isInClient").append(liff.isInClient());
+            $("#isInClient").append(liff.isInClient());
             if (liff.isInClient()) {
                 // TRUE - ค่าสั่ง liff.init ถ้าเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
-                document.getElementById("btnLogOut").style.display = "none";
+                $("#btnLogOut").css('display', 'none');
             }
             else {
                 // FALSE - 3 ปุมนี้ท่าไม่ได้ถ้าเปิดจาก external browser
-                document.getElementById("btnMsg").style.display = "none";
-                document.getElementById("btnScanCode").style.display = "none";
-                document.getElementById("btnclose").style.display = "none";
+                $("#btnMsg").css('display', 'none');
+                $("#btnScanCode").css('display', 'none');
+                $("#btnClose").css('display', 'none');
             }
         }
 
@@ -129,18 +130,18 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V21');
+                    $('#spVersion').text('V22');
                     getEnvironment();
                     getUserProfile();
                     //getContext();
                     //liff.getProfile().then((profile) => {
                     //    if (profile != null) {
-                    //        document.getElementById("displayName").append(profile.displayName);
+                    //        $("#displayName").append(profile.displayName);
                     //        //if(profile.pictureUrl != null){
-                    //        //document.getElementById("pictureurl").src = profile.pictureUrl;
+                    //        //$("#pictureurl").src = profile.pictureUrl;
                     //        //}
-                    //        document.getElementById("userId").append(profile.userId);
-                    //        document.getElementById("statusMessage").append(profile.statusMessage);
+                    //        $("#userId").append(profile.userId);
+                    //        $("#statusMessage").append(profile.statusMessage);
                     //    } else {
                     //        alert("profile null");
                     //    }
