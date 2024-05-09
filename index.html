@@ -74,9 +74,9 @@
 
     function getContext() {
       // utou (1-on-1 chat), group, room, none(external browser)
-      document.getElementById("type").append(liff.getcontext().type);
+      document.getElementById("type").append(liff.getContext().type);
       // compact, tall, full size 
-      document.getElementById("viewType").append(liff.getContext().vieNType);
+      document.getElementById("viewType").append(liff.getContext().viewType);
       // for 1-on-1 chat where liff was opened 
       document.getElementById("utouId").append(liff.getContext().utouId); 
       // for room chat where liff was opened 
@@ -98,39 +98,39 @@
    // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
 function getEnvironment() {
   // liff เปิดใน android, ios หรือ web
-  document.getElementById("os").append(liff.getOS())
+  document.getElementById("os").append(liff.getOS());
   // defualt language ของ client
-  document.getElementById("language").append(liff.getLanguage())
+  document.getElementById("language").append(liff.getLanguage());
   // version ของ liff ที่ถกเปิด
-  document.getElementById("version").append(liff.getVersion())
+  document.getElementById("version").append(liff.getVersion());
   // อันนี้เป็นค่าชั่วคราว เพื่อให้เรา access ไปที่หลังบ่านของ LINE ได้
-  document.getElementById("accessToken").append(liff.getAccessToken())
+  document.getElementById("accessToken").append(liff.getAccessToken());
   // ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
-  document.getElementById("isInClient").append(liff.isInClient())
+  document.getElementById("isInClient").append(liff.isInClient());
   if (liff.isInclient()){
     // TRUE - ค่าสั่ง liff.init ถ้าเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
-  document.getElementById("btnLogOut").style.display = "none"
+  document.getElementById("btnLogOut").style.display = "none";
   }
   else{
     // FALSE - 3 ปุมนี้ท่าไม่ได้ถ้าเปิดจาก external browser
-  document.getElementById("btnMsg").style.display = "none"
-  document.getElementById("btnScanCode").style.display = "none"
-  document.getElementById("btnclose").style.display = "none"
+  document.getElementById("btnMsg").style.display = "none";
+  document.getElementById("btnScanCode").style.display = "none";
+  document.getElementById("btnclose").style.display = "none";
   }
 }
 
     async function main() {
       await liff
   .init({
-    liffId: "2004905818-LqwOoRkn", // Use own liffId
+      liffId: "2004905818-LqwOoRkn", // Use own liffId
   })
   .then(() => {
     // Start to use liff's api
-    $('#spVersion').text('VO7');
-     $('#pOS').text('OS ' + liff.getOS());
-     getEnvironment();
-       //getUserProfile();
-       //getContext();
+      $('#spVersion').text('VO8');
+       $('#pOS').text('OS ' + liff.getOS());
+       getEnvironment();
+       getUserProfile();
+       getContext();
       // getFriendship()
       // createUniversalLink()
   })
