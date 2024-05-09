@@ -110,7 +110,7 @@
             document.getElementById("accessToken").append(liff.getAccessToken());
             // ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
             document.getElementById("isInClient").append(liff.isInClient());
-            if (liff.isInclient()) {
+            if (liff.isInClient()) {
                 // TRUE - ค่าสั่ง liff.init ถ้าเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
                 document.getElementById("btnLogOut").style.display = "none";
             }
@@ -129,7 +129,7 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V20');
+                    $('#spVersion').text('V21');
                     getEnvironment();
                     getUserProfile();
                     //getContext();
