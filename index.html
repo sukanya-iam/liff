@@ -69,20 +69,57 @@
     }
 
     function getContext() {
+      // utou (1-on-1 chat), group, room, none(external browser)
+      document.getElementById("type").append(liff.getcontext().type);
+      // compact, tall, full size 
+      document.getElementById("viewType").append(liff.getContext().vieNType);
+      // for 1-on-1 chat where liff was opened 
+      document.getElementById("utouId").append(liff.getContext().utouId); 
+      // for room chat where liff was opened 
+      document.getElementById("roomId").append(liff.getContext().roomId); 
+      // for group chat where liff was opened 
+      document.getElementById("groupId").append(liff.getcontext().groupId);
     }
 
-    async function getUserProfile() {
+    async function getuserprofile() {
+       const profile = await liff.getProfile();
+       // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag 
+       document.getElementById("pictureurl").src = profile.pictureUrl; 
+       document.getElementById("userId").append(profile.userId);
+      document.getElementById("statusHessage").append(profile.statusMessage); 
+      document.getElementById("displayName").append(profile.displayName); 
+      // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย 
+      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email);
     }
-
-    function getEnvironment() {
-    }
+   // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
+function getEnvironment() {
+// liff เปิดใน android, ios หรือ web
+document.getElementById("os").append(liff.getos())
+// defualt language ของ client
+document.getElementById("language").append(liff.getLanguage())
+// version ของ liff ที่ถกเปิด
+document.getElementById("version").append(liff.getVersion())
+// อันนี้เป็นค่าชั่วคราว เพื่อให้เรา access ไปที่หลังบ่านของ LINE ได้
+document.get&lementById("accessToken").append(liff.getAccessToken())
+// ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
+document.getElementById("isInClient").append(liff.isInClient())
+if (liff.isInclient()){
+// TRUE - ค่าสั่ง liff.init ถาเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
+document.getElementById("btnLogOut").style.display = "none"}
+else
+{// FALSE - 3 ปุมนี้ท่าไม่ได้ถ้าเปิดจาก external browser
+document.getElementById("btnMsg").style.display = "none"
+document.getElementById("btnScanCode").style.display = "none"
+document.getElementById("btnclose").style.display = "none"
+}
+}
 
     async function main() {
-      alert("Hello World, My Liff")
+      alert("Hello World, My Liff BT")
       await liff.init({ liffId: "2004905818-LqwOoRkn" })
-      // getEnvironment()
-      // getUserProfile()
-      // getContext()
+       getEnvironment()
+       getUserProfile()
+       getContext()
       // getFriendship()
       // createUniversalLink()
     }
