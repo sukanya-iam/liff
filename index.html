@@ -154,26 +154,26 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V28');
+                    $('#spVersion').text('V29');
                     getEnvironment();
-                    getUserProfile();
+                    //getUserProfile();
                     getContext();
 
-                    //liff.getProfile().then((profile) => {
-                    //    if (profile != null) {
-                    //        $("#displayName").append(profile.displayName);
-                    //        $("#pictureUrl").attr('src', profile.pictureUrl);
-                    //        $("#pictureUrlSrc").append(profile.pictureUrl);
-                    //        $("#userId").append(profile.userId);
-                    //        $("#statusMessage").append(profile.statusMessage);
-                    //        $("#decodedIDToken").append(liff.getDecodedIDToken().email);
-                    //    } else {
-                    //        alert("profile null");
-                    //    }
-                    //})
-                    //    .catch((err) => {
-                    //        alert("profile error :" + err);
-                    //    });
+                    liff.getProfile().then((profile) => {
+                       if (profile != null) {
+                           $("#displayName").append(profile.displayName);
+                           $("#pictureUrl").attr('src', profile.pictureUrl);
+                           $("#pictureUrlSrc").append(profile.pictureUrl);
+                           $("#userId").append(profile.userId);
+                           $("#statusMessage").append(profile.statusMessage);
+                           $("#decodedIDToken").append(liff.getDecodedIDToken().email);
+                       } else {
+                           alert("profile null");
+                       }
+                    })
+                       .catch((err) => {
+                           alert("profile error :" + err);
+                       });
 
                 })
                 .catch((err) => {
