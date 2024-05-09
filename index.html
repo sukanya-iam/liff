@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
-  <h2 id="hTest" style="color:pink;">Bationg V05</h2>
+  <h2 style="color:pink;">Line liff <span id="spVersion">V</span></h2>
   <p id="pOS">OS</p>
   <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
@@ -127,7 +127,8 @@ document.getElementById("btnclose").style.display = "none"
   })
   .then(() => {
     // Start to use liff's api
-    $('#pOS').text("OS: " + liff.getos());
+    $('#spVersion').text('VO6');
+    $('#pOS').text("OS: " + liff.getOS());
   })
   .catch((err) => {
     // Error happens during initialization
