@@ -132,12 +132,13 @@ function getEnvironment() {
   })
   .then(() => {
     // Start to use liff's api
-      $('#spVersion').text('V11');
+      $('#spVersion').text('V12');
        //getEnvironment();
        //getUserProfile();
        //getContext();
-    liff.getProfile()
-  .then((profile) => {
+    liff.init({
+      liffId: "2004905818-LqwOoRkn", // Use own liffId
+  }).getProfile().then((profile) => {
     alert("displayName : " + profile.displayName);
   })
   .catch((err) => {
