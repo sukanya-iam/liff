@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
-  <h2 style="color:pink;">Line liff <span id="spVersion">V</span></h2>
-  <p id="pOS" style="color:red;"></p>
+  <h2 style="color:pink;">Line liff <span id="spVersion"></span></h2>
   <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
   <p id="version"><b>Version:</b> </p>
@@ -133,21 +132,18 @@ function getEnvironment() {
   })
   .then(() => {
     // Start to use liff's api
-      $('#spVersion').text('V10');
-       $('#pOS').text('OS ' + liff.getOS());
-       getEnvironment();
+      $('#spVersion').text('V11');
+       //getEnvironment();
        //getUserProfile();
-       getContext();
-    liff
-  .getProfile()
+       //getContext();
+    liff.getProfile()
   .then((profile) => {
     alert("displayName", profile.displayName);
   })
   .catch((err) => {
-    alert("error", err);
+    alert("profile " + err);
   });
-      // getFriendship()
-      // createUniversalLink()
+     
   })
   .catch((err) => {
     // Error happens during initialization
