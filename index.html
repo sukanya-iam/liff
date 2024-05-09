@@ -130,15 +130,17 @@ function getEnvironment() {
   })
   .then(() => {
     // Start to use liff's api
-      $('#spVersion').text('V15');
+      $('#spVersion').text('V16');
        //getEnvironment();
        //getUserProfile();
        //getContext();
     liff.getProfile().then((profile) => {
-      document.getElementById("pictureurl").src = profile.pictureUrl; 
+      document.getElementById("displayName").append(profile.displayName); 
+      if(profile.pictureUrl!= null){  
+        document.getElementById("pictureurl").src = profile.pictureUrl; 
+      }
        document.getElementById("userId").append(profile.userId);
       document.getElementById("statusMessage").append(profile.statusMessage); 
-      document.getElementById("displayName").append(profile.displayName); 
   })
   .catch((err) => {
     alert("profile error :" + err);
