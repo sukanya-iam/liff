@@ -86,9 +86,7 @@
 
     async function getuserprofile() {
        //const profile = await liff.getProfile();
-      liff
-  .getProfile()
-  .then((profile) => {
+     await liff.getProfile().then((profile) => {
      // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag 
        document.getElementById("pictureurl").src = profile.pictureUrl; 
        document.getElementById("userId").append(profile.userId);
@@ -98,7 +96,7 @@
       document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email);
   })
   .catch((err) => {
-    alert("getProfile", err);
+    alert("getProfile error : " + err);
   });
     }
    // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
@@ -132,19 +130,16 @@ function getEnvironment() {
   })
   .then(() => {
     // Start to use liff's api
-      $('#spVersion').text('V13');
+      $('#spVersion').text('V14');
        //getEnvironment();
-       //getUserProfile();
+       getUserProfile();
        //getContext();
-    liff.getProfile().then((profile) => {
-    document.getElementById("pictureurl").src = profile.pictureUrl; 
-       document.getElementById("userId").append(profile.userId);
-      document.getElementById("statusHessage").append(profile.statusMessage); 
-      document.getElementById("displayName").append(profile.displayName); 
-  })
-  .catch((err) => {
-    alert("profile error :" + err);
-  });
+    //liff.getProfile().then((profile) => {
+    //document.getElementById("displayName").append(profile.displayName); 
+  //})
+  //.catch((err) => {
+   // alert("profile error :" + err);
+  //});
      
   })
   .catch((err) => {
