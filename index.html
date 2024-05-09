@@ -81,14 +81,14 @@
             // for room chat where liff was opened
             $("#roomId").append(liff.getContext().roomId);
             // for group chat where liff was opened
-            $("#groupId").append(liff.getcontext().groupId);
+            $("#groupId").append(liff.getContext().groupId);
         }
 
         async function Xgetuserprofile() {
             //const profile = await liff.getProfile();
             await liff.getProfile().then((profile) => {
                 // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
-                //$("#pictureurl").src = profile.pictureUrl;
+                $("#pictureUrl").attr('src' ,profile.pictureUrl);
                 $("#pictureUrlSrc").append(profile.pictureUrl);
                 $("#userId").append(profile.userId);
                 $("#statusMessage").append(profile.statusMessage);
@@ -106,7 +106,7 @@
                 .getProfile()
                 .then((profile) => {
                     // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
-                    //$("#pictureurl").src = profile.pictureUrl;
+                    $("#pictureUrl").attr('src', profile.pictureUrl);
                     $("#pictureUrlSrc").append(profile.pictureUrl);
                     $("#userId").append(profile.userId);
                     $("#statusMessage").append(profile.statusMessage);
@@ -150,17 +150,15 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V26');
+                    $('#spVersion').text('V27');
                     getEnvironment();
                     //getUserProfile();
-                    //getContext();
+                    getContext();
 
                     liff.getProfile().then((profile) => {
                         if (profile != null) {
                             $("#displayName").append(profile.displayName);
-                            //if(profile.pictureUrl != null){
-                            //$("#pictureurl").src = profile.pictureUrl;
-                            //}
+                            $("#pictureUrl").attr('src', profile.pictureUrl);
                             $("#pictureUrlSrc").append(profile.pictureUrl);
                             $("#userId").append(profile.userId);
                             $("#statusMessage").append(profile.statusMessage);
