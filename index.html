@@ -150,27 +150,28 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V25');
+                    $('#spVersion').text('V26');
                     getEnvironment();
                     //getUserProfile();
-                    getContext();
+                    //getContext();
 
-                    //liff.getProfile().then((profile) => {
-                    //    if (profile != null) {
-                    //        $("#displayName").append(profile.displayName);
-                    //        //if(profile.pictureUrl != null){
-                    //        //$("#pictureurl").src = profile.pictureUrl;
-                    //        //}
-                    //        $("#pictureUrlSrc").append(profile.pictureUrl);
-                    //        $("#userId").append(profile.userId);
-                    //        $("#statusMessage").append(profile.statusMessage);
-                    //    } else {
-                    //        alert("profile null");
-                    //    }
-                    //})
-                    //    .catch((err) => {
-                    //        alert("profile error :" + err);
-                    //    });
+                    liff.getProfile().then((profile) => {
+                        if (profile != null) {
+                            $("#displayName").append(profile.displayName);
+                            //if(profile.pictureUrl != null){
+                            //$("#pictureurl").src = profile.pictureUrl;
+                            //}
+                            $("#pictureUrlSrc").append(profile.pictureUrl);
+                            $("#userId").append(profile.userId);
+                            $("#statusMessage").append(profile.statusMessage);
+                            $("#decodedIDToken").append(liff.getDecodedIDToken().email);
+                        } else {
+                            alert("profile null");
+                        }
+                    })
+                        .catch((err) => {
+                            alert("profile error :" + err);
+                        });
 
                 })
                 .catch((err) => {
