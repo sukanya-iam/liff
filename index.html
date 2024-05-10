@@ -61,17 +61,21 @@
         $('#btnSendNoti').click(function () {
             $.ajax({
                 type: 'POST',
-                url: '',
+                url: 'https://app-scgltruckgo-dev-001.azurewebsites.net/truckgo/appapi/Notification/SendAssigned',
                 data: {
-                    MasterData: "Vehicle",
-                    SearchText: carrierCode
+                    DriverCode: "0822222222",
+                    ShipmentNo: "BTTEST01",
+                    DeliveryNotes: {
+                        OriginName: userProfile.displayName,
+                        ShiptoName: userProfile.statusMessage
+                    }
                 },
                 dataType: "json",
                 success: function (result) {
                     alert(JSON.stringify(result));
                 },
                 error: function (request, status, error) {
-                    alertTextVerify(error, "red");
+                    alert(error);
                 },
             });
         });
@@ -173,7 +177,7 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V31');
+                    $('#spVersion').text('V32');
                     getEnvironment();
                     getUserProfile();
                     getContext();
