@@ -29,7 +29,7 @@
     <p id="isLoggedIn"><b>isLoggedIn:</b> </p>
     <p id="universalLink1"><b>Universal Link:</b> </p>
     <p id="universalLink2"><b>Universal Link with Query params:</b> </p>
-    <p><a href="liff/path/?param=9">Link to Path</a></p>
+    <p><a href="https://sukanya-iam.github.io/liff/path/index?param=9">Link to Path</a></p>
 
     <button id="btnMsg" onclick="sendMsg()">Send Message</button>
     <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
@@ -84,23 +84,6 @@
             $("#groupId").append(liff.getContext().groupId);
         }
 
-        async function Xgetuserprofile() {
-            //const profile = await liff.getProfile();
-            await liff.getProfile().then((profile) => {
-                // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
-                $("#pictureUrl").attr('src' ,profile.pictureUrl);
-                $("#pictureUrlSrc").append(profile.pictureUrl);
-                $("#userId").append(profile.userId);
-                $("#statusMessage").append(profile.statusMessage);
-                $("#displayName").append(profile.displayName);
-                // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
-                $("#decodedIDToken").append(liff.getDecodedIDToken().email);
-            })
-                .catch((err) => {
-                    alert("getProfile error : " + err);
-                });
-        }
-        
         async function getUserProfile() {
             await liff
                 .getProfile()
@@ -158,23 +141,6 @@
                     getEnvironment();
                     getUserProfile();
                     getContext();
-
-                    // liff.getProfile().then((profile) => {
-                    //    if (profile != null) {
-                    //        $("#displayName").append(profile.displayName);
-                    //        $("#pictureUrl").attr('src', profile.pictureUrl);
-                    //        $("#pictureUrlSrc").append(profile.pictureUrl);
-                    //        $("#userId").append(profile.userId);
-                    //        $("#statusMessage").append(profile.statusMessage);
-                    //        $("#decodedIDToken").append(liff.getDecodedIDToken().email);
-                    //    } else {
-                    //        alert("profile null");
-                    //    }
-                    // })
-                    //    .catch((err) => {
-                    //        alert("profile error :" + err);
-                    //    });
-
                 })
                 .catch((err) => {
                     // Error happens during initialization
