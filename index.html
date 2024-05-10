@@ -13,6 +13,7 @@
     <h2 style="color: rgb(2, 92, 177); text-align: center;">Line liff <span id="spVersion"></span></h2>
     <button id="btnSendNoti" style="display: none;">Send Noti</button>
     <h4 style="color: red;" id="errorMsg"></h4>
+    <h4 style="color: gray;" id="logFunc"></h4>
     <hr>
     <h3 class="head-info">Get Environment</h3>
     <p id="os"><b>OS:</b> </p>
@@ -65,12 +66,13 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V42');
+            $('#spVersion').text('V43');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
+                    $('#logFunc').append('<span>main|</span>');
                     // Start to use liff's api
                     getEnvironment();
                     getUserProfile();
@@ -80,12 +82,13 @@
                 })
                 .catch((err) => {
                     // Error happens during initialization
-                    $('#errorMsg').text(err.code + " : " + err.message);
+                    $('#errorMsg').text("main error, " + err.code + " : " + err.message);
                 });
         }
         main();
 
         function getEnvironment() {
+            $('#logFunc').append('<span>Envi|</span>');
             // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
             // liff เปิดใน android, ios หรือ web
             $("#os").append(liff.getOS());
@@ -110,6 +113,7 @@
         }
 
         async function getUserProfile() {
+            $('#logFunc').append('<span>Profile|</span>');
             await liff
                 .getProfile()
                 .then((profile) => {
@@ -138,6 +142,7 @@
         }
 
         function getContext() {
+            $('#logFunc').append('<span>Context|</span>');
             // utou (1-on-1 chat), group, room, none(external browser)
             $("#type").append(liff.getContext().type);
             // compact, tall, full size
@@ -184,6 +189,7 @@
         }
 
         async function sendMsg() {
+            $('#logFunc').append('<span>sendMsg|</span>');
             await liff
                 .sendMessages([
                     {
@@ -200,6 +206,7 @@
         }
 
         async function shareMsg() {
+            $('#logFunc').append('<span>shareMsg|</span>');
             await liff
                 .shareTargetPicker(
                     [
@@ -228,6 +235,7 @@
         }
 
         async function scanCode() {
+            $('#logFunc').append('<span>scanCode|</span>');
             await liff
                 .scanCodeV2()
                 .then((result) => {
@@ -241,6 +249,7 @@
         }
 
         function openWindow() {
+            $('#logFunc').append('<span>openWindow|</span>');
             liff.openWindow({
                 url: "https://line.me",
                 external: true,
@@ -255,6 +264,7 @@
         }
 
         async function getFriendship() {
+            $('#logFunc').append('<span>Friendship|</span>');
             await liff.getFriendship().then((data) => {
                 if (data.friendFlag) {
                     // something you want to do
