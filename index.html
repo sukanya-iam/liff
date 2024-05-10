@@ -63,20 +63,21 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.1');
+            $('#spVersion').text('V38.2');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
                     // Start to use liff's api
-                    getEnvironment();
-                    getUserProfile();
-                    getContext();
+                    $("#os").append(liff.getOS());
+                    //getEnvironment();
+                    //getUserProfile();
+                    //getContext();
                 })
                 .catch((err) => {
                     // Error happens during initialization
-                    $('#errorMsg').text(err.code + " : " + err.message);
+                    $('#errorMsg').text("main , " + err.code + " : " + err.message);
                 });
         }
         main();
