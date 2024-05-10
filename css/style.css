@@ -31,3 +31,8 @@ p {
   display: block;
   overflow: auto
 }
+
+.head-info{
+  text-align: center;
+  color: rgb(39, 161, 209);
+}

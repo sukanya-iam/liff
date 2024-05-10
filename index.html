@@ -10,24 +10,33 @@
 </head>
 
 <body>
-    <button id="btnShowProfile">Profile</button>
-    <button id="btnSendNoti">Send Noti</button>
-    <h2 style="color:pink;">Line liff <span id="spVersion"></span></h2>
+    <h2 style="color: rgb(2, 92, 177); text-align: center;">Line liff <span id="spVersion"></span></h2>
+    <button id="btnSendNoti" style="display: none;">Send Noti</button>
+    <h4 style="color: red;" id="errorMsg"></h4>
+    <hr>
+    <h3 class="head-info">Get Environment</h3>
     <p id="os"><b>OS:</b> </p>
     <p id="language"><b>Language:</b> </p>
     <p id="version"><b>Version:</b> </p>
     <p id="isInClient"><b>isInClient:</b> </p>
     <p id="accessToken"><b>AccessToken:</b> </p>
+<hr>
+    <h3 class="head-info">Get Profile</h3>
     <img id="pictureUrl">
     <p id="userId"><b>userId:</b> </p>
     <p id="displayName"><b>displayName:</b> </p>
     <p id="statusMessage"><b>statusMessage:</b> </p>
     <p id="decodedIDToken"><b>email:</b> </p>
+    <button id="btnShowProfile">Profile</button>
+    <hr>
+    <h3 class="head-info">Get Context</h3>
     <p id="type"><b>type:</b> </p>
     <p id="viewType"><b>viewType:</b> </p>
     <p id="utouId"><b>utouId:</b> </p>
     <p id="roomId"><b>roomId:</b> </p>
     <p id="groupId"><b>groupId:</b> </p>
+    <hr>
+    <h3 class="head-info">Other</h3>
     <p id="friendship"><b>isFriendship:</b> </p>
     <p id="scanCode"><b>Code:</b> </p>
     <p id="isLoggedIn"><b>isLoggedIn:</b> </p>
@@ -53,6 +62,90 @@
     <script>
         var userProfile = null;
 
+        async function main() {
+            $('#spVersion').text('V35');
+            await liff
+                .init({
+                    liffId: "2004905818-LqwOoRkn", // Use own liffId
+                })
+                .then(() => {
+                    // Start to use liff's api
+                    getEnvironment();
+                    getUserProfile();
+                    getContext();
+                })
+                .catch((err) => {
+                    // Error happens during initialization
+                    $('#errorMsg').text(err.code + " : " + err.message);
+                });
+        }
+        main();
+
+        function getEnvironment() {
+            // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
+            // liff เปิดใน android, ios หรือ web
+            $("#os").append(liff.getOS());
+            // defualt language ของ client
+            $("#language").append(liff.getLanguage());
+            // version ของ liff ที่ถกเปิด
+            $("#version").append(liff.getVersion());
+            // อันนี้เป็นค่าชั่วคราว เพื่อให้เรา access ไปที่หลังบ่านของ LINE ได้
+            $("#accessToken").append(liff.getAccessToken());
+            // ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
+            $("#isInClient").append(liff.isInClient());
+            if (liff.isInClient()) {
+                // TRUE - ค่าสั่ง liff.init ถ้าเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
+                $("#btnLogOut").css('display', 'none');
+            }
+            else {
+                // FALSE - 3 ปุมนี้ทำไม่ได้ถ้าเปิดจาก external browser
+                $("#btnMsg").css('display', 'none');
+                $("#btnScanCode").css('display', 'none');
+                $("#btnClose").css('display', 'none');
+            }
+        }
+        
+        async function getUserProfile() {
+            await liff
+                .getProfile()
+                .then((profile) => {
+                    if (profile != null) {
+                        $("#displayName").append(profile.displayName);
+                        // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
+                        $("#pictureUrl").attr('src', profile.pictureUrl);
+                        $("#userId").append(profile.userId);
+                        $("#statusMessage").append(profile.statusMessage);
+                        // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
+                        $("#decodedIDToken").append(liff.getDecodedIDToken().email);
+
+                        userProfile = {
+                            userId: profile.userId,
+                            displayName: profile.displayName,
+                            pictureUrl: profile.pictureUrl,
+                            email: liff.getDecodedIDToken().email
+                        }
+                    } else {
+                        $('#errorMsg').text("profile null");
+                    }
+                })
+                .catch((err) => {
+                    $('#errorMsg').text("getProfile() is error , " + err);
+                });
+        }
+
+        function getContext() {
+            // utou (1-on-1 chat), group, room, none(external browser)
+            $("#type").append(liff.getContext().type);
+            // compact, tall, full size
+            $("#viewType").append(liff.getContext().viewType);
+            // for 1-on-1 chat where liff was opened
+            $("#utouId").append(liff.getContext().utouId);
+            // for room chat where liff was opened
+            $("#roomId").append(liff.getContext().roomId);
+            // for group chat where liff was opened
+            $("#groupId").append(liff.getContext().groupId);
+        }
+
         $('#btnShowProfile').click(function () {
             alert(JSON.stringify(userProfile));
         });
@@ -77,7 +170,7 @@
                         alert("result : " + JSON.stringify(result));
                     },
                     error: function (request, status, error) {
-                        alert(JSON.stringify(request) + " | Status : " + status );
+                        alert(JSON.stringify(request) + " | Status : " + status);
                     },
                 });
             }
@@ -106,90 +199,7 @@
 
         async function sendMsg() {
         }
-
-        function getContext() {
-            // utou (1-on-1 chat), group, room, none(external browser)
-            $("#type").append(liff.getContext().type);
-            // compact, tall, full size
-            $("#viewType").append(liff.getContext().viewType);
-            // for 1-on-1 chat where liff was opened
-            $("#utouId").append(liff.getContext().utouId);
-            // for room chat where liff was opened
-            $("#roomId").append(liff.getContext().roomId);
-            // for group chat where liff was opened
-            $("#groupId").append(liff.getContext().groupId);
-        }
-
-        async function getUserProfile() {
-            await liff
-                .getProfile()
-                .then((profile) => {
-                    if (profile != null) {
-                        $("#displayName").append(profile.displayName);
-                        // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
-                        $("#pictureUrl").attr('src', profile.pictureUrl);
-                        $("#userId").append(profile.userId);
-                        $("#statusMessage").append(profile.statusMessage);
-                        // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
-                        $("#decodedIDToken").append(liff.getDecodedIDToken().email);
-
-                        userProfile = {
-                            userId: profile.userId,
-                            displayName: profile.displayName,
-                            pictureUrl: profile.pictureUrl,
-                            email: liff.getDecodedIDToken().email
-                        }
-                    } else {
-                        alert("profile null");
-                    }
-                })
-                .catch((err) => {
-                    alert("getProfile error : " + err);
-                });
-        }
-       
-        function getEnvironment() {
-            // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
-            // liff เปิดใน android, ios หรือ web
-            $("#os").append(liff.getOS());
-            // defualt language ของ client
-            $("#language").append(liff.getLanguage());
-            // version ของ liff ที่ถกเปิด
-            $("#version").append(liff.getVersion());
-            // อันนี้เป็นค่าชั่วคราว เพื่อให้เรา access ไปที่หลังบ่านของ LINE ได้
-            $("#accessToken").append(liff.getAccessToken());
-            // ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
-            $("#isInClient").append(liff.isInClient());
-            if (liff.isInClient()) {
-                // TRUE - ค่าสั่ง liff.init ถ้าเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
-                $("#btnLogOut").css('display', 'none');
-            }
-            else {
-                // FALSE - 3 ปุมนี้ทำไม่ได้ถ้าเปิดจาก external browser
-                $("#btnMsg").css('display', 'none');
-                $("#btnScanCode").css('display', 'none');
-                $("#btnClose").css('display', 'none');
-            }
-        }
-
-        async function main() {
-            await liff
-                .init({
-                    liffId: "2004905818-LqwOoRkn", // Use own liffId
-                })
-                .then(() => {
-                    // Start to use liff's api
-                    $('#spVersion').text('V34');
-                    getEnvironment();
-                    getUserProfile();
-                    getContext();
-                })
-                .catch((err) => {
-                    // Error happens during initialization
-                    alert(err.code + ":" + err.message);
-                });
-        }
-        main()
+        
     </script>
 </body>
 
