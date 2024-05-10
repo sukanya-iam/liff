@@ -11,7 +11,7 @@
 
 <body>
     <h2 style="color: rgb(2, 92, 177); text-align: center;">Line liff <span id="spVersion"></span></h2>
-    <button id="btnSendNoti" style="display: none;">Send Noti</button>
+
     <h4 style="color: red;" id="errorMsg"></h4>
     <hr>
     <h3 class="head-info">Get Environment</h3>
@@ -63,18 +63,16 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.4');
+            $('#spVersion').text('V38.5');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
                     // Start to use liff's api
-
-                    $("#accessToken").append(liff.getAccessToken());
-                    //getEnvironment();
-                    //getUserProfile();
-                    //getContext();
+                    getEnvironment();
+                    getUserProfile();
+                    getContext();
                 })
                 .catch((err) => {
                     // Error happens during initialization
@@ -142,46 +140,26 @@
         }
 
         function getContext() {
-            // utou (1-on-1 chat), group, room, none(external browser)
-            $("#type").append(liff.getContext().type);
-            // compact, tall, full size
-            $("#viewType").append(liff.getContext().viewType);
-            // for 1-on-1 chat where liff was opened
-            $("#utouId").append(liff.getContext().utouId);
-            // for room chat where liff was opened
-            $("#roomId").append(liff.getContext().roomId);
-            // for group chat where liff was opened
-            $("#groupId").append(liff.getContext().groupId);
+            try {
+                // utou (1-on-1 chat), group, room, none(external browser)
+                $("#type").append(liff.getContext().type);
+                // compact, tall, full size
+                $("#viewType").append(liff.getContext().viewType);
+                // for 1-on-1 chat where liff was opened
+                $("#utouId").append(liff.getContext().utouId);
+                // for room chat where liff was opened
+                $("#roomId").append(liff.getContext().roomId);
+                // for group chat where liff was opened
+                $("#groupId").append(liff.getContext().groupId);
+            }
+            catch (err) {
+                $('#errorMsg').text("Context , " + err.message);
+            }
+
         }
 
         $('#btnShowProfile').click(function () {
             alert(JSON.stringify(userProfile));
-        });
-
-        $('#btnSendNoti').click(function () {
-            if (userProfile == null) {
-                alert("userProfile is null");
-            } else {
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://app-scgltruckgo-dev-001.azurewebsites.net/truckgo/appapi/Notification/SendAssigned',
-                    data: {
-                        DriverCode: "0822222222",
-                        ShipmentNo: "BTTEST01",
-                        DeliveryNotes: [{
-                            OriginName: userProfile.displayName,
-                            ShiptoName: userProfile.statusMessage
-                        }]
-                    },
-                    dataType: "json",
-                    success: function (result) {
-                        alert("result : " + JSON.stringify(result));
-                    },
-                    error: function (request, status, error) {
-                        alert(JSON.stringify(request) + " | Status : " + status);
-                    },
-                });
-            }
         });
 
         function createUniversalLink() {
@@ -200,9 +178,6 @@
         }
 
         function openWindow() {
-        }
-
-        async function getFriendship() {
         }
 
         async function sendMsg() {
