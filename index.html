@@ -64,7 +64,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.6');
+            $('#spVersion').text('V38.7');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
@@ -176,6 +176,19 @@
         }
 
         async function scanCode() {
+            await liff
+                .scanCodeV2()
+                .then((result) => {
+                    // result = { value: "" }
+                    if(result != null){
+                        $('#scanCode').append(result.value);
+                    }  else{
+                        $('#scanCode').html('<b>Code:</b> ');
+                    }
+                })
+                .catch((error) => {
+                    $('#errorMsg').text("scanCode , " + error);
+                });
         }
 
         function openWindow() {
