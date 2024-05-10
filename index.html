@@ -259,7 +259,7 @@
         // }
 
         async function main() {
-            $('#spVersion').text('V45');
+            $('#spVersion').text('V46');
             $('#logFunc').append('main|');
             await liff
                 .init({
@@ -268,8 +268,8 @@
                 .then(() => {
                     // Start to use liff's api
                     getEnvironment();
-                    getUserProfile();
-                    getContext();
+                    //getUserProfile();
+                    //getContext();
                     //getFriendship();
                     // createUniversalLink();
                 })
