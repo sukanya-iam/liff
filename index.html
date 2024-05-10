@@ -44,6 +44,7 @@
     <p id="universalLink2"><b>Universal Link with Query params:</b> </p>
     <p><a href="https://sukanya-iam.github.io/liff/path/index?param=9">Link to Path</a></p>
 
+    <label>Send Msg : <span id="logSendMsg"></span></label>
     <button id="btnMsg" onclick="sendMsg()">Send Message</button>
     <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
     <button onclick="openWindow()">Open Window</button>
@@ -63,7 +64,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.5');
+            $('#spVersion').text('V38.6');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
@@ -181,6 +182,19 @@
         }
 
         async function sendMsg() {
+            await liff
+                .sendMessages([
+                    {
+                        type: "text",
+                        text: "Hello, World! by sendMsg()",
+                    },
+                ])
+                .then(() => {
+                    $('#logSendMsg').text("message sent");
+                })
+                .catch((err) => {
+                    $('#logSendMsg').text("sendMsg error, ", err);
+                });
         }
 
     </script>
