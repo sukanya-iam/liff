@@ -64,7 +64,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V40');
+            $('#spVersion').text('V41');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
@@ -74,6 +74,8 @@
                     getEnvironment();
                     getUserProfile();
                     getContext();
+                    getFriendship();
+                    // createUniversalLink();
                 })
                 .catch((err) => {
                     // Error happens during initialization
@@ -217,7 +219,8 @@
                 .scanCodeV2()
                 .then((result) => {
                     // result = { value: "" }
-                    $('#scanCode').append(result)
+                    alert(JSON.stringify(result));
+                    $('#scanCode').append(result);
                 })
                 .catch((error) => {
                     $('#errorMsg').text("scanCode is error, ", error);
@@ -234,6 +237,12 @@
         }
 
         async function getFriendship() {
+            await liff.getFriendship().then((data) => {
+                if (data.friendFlag) {
+                    // something you want to do
+                }
+                $('#friendship').append(data.friendFlag);
+            });
         }
 
 
