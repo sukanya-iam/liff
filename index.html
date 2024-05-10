@@ -185,35 +185,35 @@
 
         async function shareMsg() {
             $('#logFunc').append('shareMsg|');
-            if (liff.isApiAvailable('shareTargetPicker')) {
-                await liff
-                    .shareTargetPicker(
-                        [
-                            {
-                                type: "text",
-                                text: "Hello, World!",
-                            },
-                        ],
-                        {
-                            isMultiple: true,
-                        }
-                    )
-                    .then(function (res) {
-                        if (res) {
-                            // succeeded in sending a message through TargetPicker
-                            $('#logShareMsg').text(`[${res.status}] Message sent!`);
-                        } else {
-                            // sending message canceled
-                            $('#logShareMsg').text("TargetPicker was closed!");
-                        }
-                    })
-                    .catch(function (error) {
-                        // something went wrong before sending a message
-                        $('#logShareMsg').text("something wrong happen");
-                    });
-            } else {
-                $('#logShareMsg').text("ApiAvailable is false");
-            }
+            // if (liff.isApiAvailable('shareTargetPicker')) {
+            //     await liff
+            //         .shareTargetPicker(
+            //             [
+            //                 {
+            //                     type: "text",
+            //                     text: "Hello, World!",
+            //                 },
+            //             ],
+            //             {
+            //                 isMultiple: true,
+            //             }
+            //         )
+            //         .then(function (res) {
+            //             if (res) {
+            //                 // succeeded in sending a message through TargetPicker
+            //                 $('#logShareMsg').text(`[${res.status}] Message sent!`);
+            //             } else {
+            //                 // sending message canceled
+            //                 $('#logShareMsg').text("TargetPicker was closed!");
+            //             }
+            //         })
+            //         .catch(function (error) {
+            //             // something went wrong before sending a message
+            //             $('#logShareMsg').text("something wrong happen");
+            //         });
+            // } else {
+            //     $('#logShareMsg').text("ApiAvailable is false");
+            // }
         }
 
         async function scanCode() {
@@ -248,24 +248,24 @@
             liff.closeWindow();
         }
 
-        async function getFriendship() {
-            $('#logFunc').append('Friendship|');
-            await liff.getFriendship().then((data) => {
-                if (data.friendFlag) {
-                    // something you want to do
-                }
-                $('#friendship').append(data.friendFlag);
-            });
-        }
+        // async function getFriendship() {
+        //     $('#logFunc').append('Friendship|');
+        //     await liff.getFriendship().then((data) => {
+        //         if (data.friendFlag) {
+        //             // something you want to do
+        //         }
+        //         $('#friendship').append(data.friendFlag);
+        //     });
+        // }
 
         async function main() {
-            $('#spVersion').text('V44');
+            $('#spVersion').text('V45');
+            $('#logFunc').append('main|');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
-                    $('#logFunc').append('main');
                     // Start to use liff's api
                     getEnvironment();
                     getUserProfile();
