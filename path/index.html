@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 <body>
+  <h4 style="color: red;" id="errorMsg"></h4>
   <h1>Hello World!</h1>
   <p id="param"><b>Query Param: </b></p>
   <img id="pictureUrl">
@@ -14,11 +15,29 @@
   <p id="displayName"><b>displayName:</b> </p>
   <p id="statusMessage"><b>statusMessage:</b> </p>
   <p id="decodedIDToken"><b>email:</b> </p>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     // Query Params
     const queryString = decodeURIComponent(window.location.search);
     const params = new URLSearchParams(queryString);
     document.getElementById("param").append(params.get("param"));
+    async function main() {
+            
+            await liff
+                .init({
+                    liffId: "2004905818-LqwOoRkn", // Use own liffId
+                })
+                .then(() => {
+                    // Start to use liff's api
+                    
+                })
+                .catch((err) => {
+                    // Error happens during initialization
+                    $('#errorMsg').text("main , " + err.code + " : " + err.message);
+                });
+        }
+        main();
   </script>
 </body>
 </html>
