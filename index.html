@@ -64,7 +64,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.7');
+            $('#spVersion').text('V38.8');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
@@ -173,6 +173,7 @@
         }
 
         function closed() {
+            liff.closeWindow();
         }
 
         async function scanCode() {
@@ -180,9 +181,9 @@
                 .scanCodeV2()
                 .then((result) => {
                     // result = { value: "" }
-                    if(result != null){
+                    if (result != null) {
                         $('#scanCode').append(result.value);
-                    }  else{
+                    } else {
                         $('#scanCode').html('<b>Code:</b> ');
                     }
                 })
@@ -192,6 +193,10 @@
         }
 
         function openWindow() {
+            liff.openWindow({
+                url: "https://line.me",
+                external: true,
+            });
         }
 
         async function sendMsg() {
