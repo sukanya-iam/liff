@@ -77,7 +77,7 @@
                         alert("result : " + JSON.stringify(result));
                     },
                     error: function (request, status, error) {
-                        alert(request + " | " + status+ " | " + error);
+                        alert(JSON.stringify(request) + " | Status : " + status );
                     },
                 });
             }
@@ -179,7 +179,7 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V33');
+                    $('#spVersion').text('V34');
                     getEnvironment();
                     getUserProfile();
                     getContext();
