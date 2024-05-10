@@ -13,7 +13,6 @@
     <h2 style="color: rgb(2, 92, 177); text-align: center;">Line liff <span id="spVersion"></span></h2>
     <button id="btnSendNoti" style="display: none;">Send Noti</button>
     <h4 style="color: red;" id="errorMsg"></h4>
-    <h4 style="color: gray;" id="logFunc"></h4>
     <hr>
     <h3 class="head-info">Get Environment</h3>
     <p id="os"><b>OS:</b> </p>
@@ -45,12 +44,11 @@
     <p id="universalLink2"><b>Universal Link with Query params:</b> </p>
     <p><a href="https://sukanya-iam.github.io/liff/path/index?param=9">Link to Path</a></p>
 
-    <label>send Msg : <span id="logSendMsg"></span></label>
     <button id="btnMsg" onclick="sendMsg()">Send Message</button>
-    <label>share Msg : <span id="logShareMsg"></span></label>
+    <label>shareMsg : <span id="logShareMsg"></span></label>
     <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
-    <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
     <button onclick="openWindow()">Open Window</button>
+    <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
     <button id="btnClose" onclick="closed()">Close</button>
 
@@ -65,8 +63,26 @@
     <script>
         var userProfile = null;
 
+        async function main() {
+            $('#spVersion').text('V39.1');
+            await liff
+                .init({
+                    liffId: "2004905818-LqwOoRkn", // Use own liffId
+                })
+                .then(() => {
+                    // Start to use liff's api
+                    getEnvironment();
+                    getUserProfile();
+                    getContext();
+                })
+                .catch((err) => {
+                    // Error happens during initialization
+                    $('#errorMsg').text(err.code + " : " + err.message);
+                });
+        }
+        main();
+
         function getEnvironment() {
-            $('#logFunc').append('Envi|');
             // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
             // liff เปิดใน android, ios หรือ web
             $("#os").append(liff.getOS());
@@ -91,7 +107,6 @@
         }
 
         async function getUserProfile() {
-            $('#logFunc').append('Profile|');
             await liff
                 .getProfile()
                 .then((profile) => {
@@ -120,7 +135,6 @@
         }
 
         function getContext() {
-            $('#logFunc').append('Context|');
             // utou (1-on-1 chat), group, room, none(external browser)
             $("#type").append(liff.getContext().type);
             // compact, tall, full size
@@ -166,119 +180,51 @@
         function createUniversalLink() {
         }
 
-        async function sendMsg() {
-            $('#logFunc').append('sendMsg|');
-            await liff
-                .sendMessages([
-                    {
-                        type: "text",
-                        text: "Hello, World!",
-                    },
-                ])
-                .then(() => {
-                    $('#logSendMsg').text("message sent");
-                })
-                .catch((err) => {
-                    $('#logSendMsg').text("sendMsg is error", err);
-                });
-        }
-
         async function shareMsg() {
-            $('#logFunc').append('shareMsg|');
-            // if (liff.isApiAvailable('shareTargetPicker')) {
-            //     await liff
-            //         .shareTargetPicker(
-            //             [
-            //                 {
-            //                     type: "text",
-            //                     text: "Hello, World!",
-            //                 },
-            //             ],
-            //             {
-            //                 isMultiple: true,
-            //             }
-            //         )
-            //         .then(function (res) {
-            //             if (res) {
-            //                 // succeeded in sending a message through TargetPicker
-            //                 $('#logShareMsg').text(`[${res.status}] Message sent!`);
-            //             } else {
-            //                 // sending message canceled
-            //                 $('#logShareMsg').text("TargetPicker was closed!");
-            //             }
-            //         })
-            //         .catch(function (error) {
-            //             // something went wrong before sending a message
-            //             $('#logShareMsg').text("something wrong happen");
-            //         });
-            // } else {
-            //     $('#logShareMsg').text("ApiAvailable is false");
-            // }
-        }
-
-        async function scanCode() {
-            $('#logFunc').append('scanCode|');
-            await liff
-                .scanCodeV2()
-                .then((result) => {
-                    // result = { value: "" }
-                    alert(JSON.stringify(result));
-                    $('#scanCode').append(result);
+            liff
+                .shareTargetPicker(
+                    [
+                        {
+                            type: "text",
+                            text: "Hello, World!",
+                        },
+                    ],
+                    {
+                        isMultiple: true,
+                    }
+                )
+                .then(function (res) {
+                    if (res) {
+                        // succeeded in sending a message through TargetPicker
+                       $('#logShareMsg').text(`[${res.status}] Message sent!`);
+                    } else {
+                        // sending message canceled
+                        $('#logShareMsg').text("TargetPicker was closed!");
+                    }
                 })
-                .catch((error) => {
-                    $('#errorMsg').text("scanCode is error, ", error);
+                .catch(function (error) {
+                    // something went wrong before sending a message
+                    $('#logShareMsg').text("something wrong happen");
                 });
-        }
-
-        function openWindow() {
-            $('#logFunc').append('openWindow|');
-            liff.openWindow({
-                url: "https://line.me",
-                external: true,
-            });
         }
 
         function logOut() {
-            if (liff.isLoggedIn()) {
-                liff.logout();
-            }
         }
 
         function closed() {
-            liff.closeWindow();
         }
 
-        // async function getFriendship() {
-        //     $('#logFunc').append('Friendship|');
-        //     await liff.getFriendship().then((data) => {
-        //         if (data.friendFlag) {
-        //             // something you want to do
-        //         }
-        //         $('#friendship').append(data.friendFlag);
-        //     });
-        // }
-
-        async function main() {
-            $('#spVersion').text('V46');
-            $('#logFunc').append('main|');
-            await liff
-                .init({
-                    liffId: "2004905818-LqwOoRkn", // Use own liffId
-                })
-                .then(() => {
-                    // Start to use liff's api
-                    getEnvironment();
-                    //getUserProfile();
-                    //getContext();
-                    //getFriendship();
-                    // createUniversalLink();
-                })
-                .catch((err) => {
-                    // Error happens during initialization
-                    $('#errorMsg').text("main error, " + err.code + " : " + err.message);
-                });
+        async function scanCode() {
         }
-        main();
+
+        function openWindow() {
+        }
+
+        async function getFriendship() {
+        }
+
+        async function sendMsg() {
+        }
 
     </script>
 </body>
