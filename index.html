@@ -65,30 +65,8 @@
     <script>
         var userProfile = null;
 
-        async function main() {
-            $('#spVersion').text('V43');
-            await liff
-                .init({
-                    liffId: "2004905818-LqwOoRkn", // Use own liffId
-                })
-                .then(() => {
-                    $('#logFunc').append('<span>main|</span>');
-                    // Start to use liff's api
-                    getEnvironment();
-                    getUserProfile();
-                    getContext();
-                    //getFriendship();
-                    // createUniversalLink();
-                })
-                .catch((err) => {
-                    // Error happens during initialization
-                    $('#errorMsg').text("main error, " + err.code + " : " + err.message);
-                });
-        }
-        main();
-
         function getEnvironment() {
-            $('#logFunc').append('<span>Envi|</span>');
+            $('#logFunc').append('Envi|');
             // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
             // liff เปิดใน android, ios หรือ web
             $("#os").append(liff.getOS());
@@ -113,7 +91,7 @@
         }
 
         async function getUserProfile() {
-            $('#logFunc').append('<span>Profile|</span>');
+            $('#logFunc').append('Profile|');
             await liff
                 .getProfile()
                 .then((profile) => {
@@ -142,7 +120,7 @@
         }
 
         function getContext() {
-            $('#logFunc').append('<span>Context|</span>');
+            $('#logFunc').append('Context|');
             // utou (1-on-1 chat), group, room, none(external browser)
             $("#type").append(liff.getContext().type);
             // compact, tall, full size
@@ -189,7 +167,7 @@
         }
 
         async function sendMsg() {
-            $('#logFunc').append('<span>sendMsg|</span>');
+            $('#logFunc').append('sendMsg|');
             await liff
                 .sendMessages([
                     {
@@ -206,36 +184,40 @@
         }
 
         async function shareMsg() {
-            $('#logFunc').append('<span>shareMsg|</span>');
-            await liff
-                .shareTargetPicker(
-                    [
+            $('#logFunc').append('shareMsg|');
+            if (liff.isApiAvailable('shareTargetPicker')) {
+                await liff
+                    .shareTargetPicker(
+                        [
+                            {
+                                type: "text",
+                                text: "Hello, World!",
+                            },
+                        ],
                         {
-                            type: "text",
-                            text: "Hello, World!",
-                        },
-                    ],
-                    {
-                        isMultiple: true,
-                    }
-                )
-                .then(function (res) {
-                    if (res) {
-                        // succeeded in sending a message through TargetPicker
-                        $('#logShareMsg').text(`[${res.status}] Message sent!`);
-                    } else {
-                        // sending message canceled
-                        $('#logShareMsg').text("TargetPicker was closed!");
-                    }
-                })
-                .catch(function (error) {
-                    // something went wrong before sending a message
-                    $('#logShareMsg').text("something wrong happen");
-                });
+                            isMultiple: true,
+                        }
+                    )
+                    .then(function (res) {
+                        if (res) {
+                            // succeeded in sending a message through TargetPicker
+                            $('#logShareMsg').text(`[${res.status}] Message sent!`);
+                        } else {
+                            // sending message canceled
+                            $('#logShareMsg').text("TargetPicker was closed!");
+                        }
+                    })
+                    .catch(function (error) {
+                        // something went wrong before sending a message
+                        $('#logShareMsg').text("something wrong happen");
+                    });
+            } else {
+                $('#logShareMsg').text("ApiAvailable is false");
+            }
         }
 
         async function scanCode() {
-            $('#logFunc').append('<span>scanCode|</span>');
+            $('#logFunc').append('scanCode|');
             await liff
                 .scanCodeV2()
                 .then((result) => {
@@ -249,7 +231,7 @@
         }
 
         function openWindow() {
-            $('#logFunc').append('<span>openWindow|</span>');
+            $('#logFunc').append('openWindow|');
             liff.openWindow({
                 url: "https://line.me",
                 external: true,
@@ -257,6 +239,9 @@
         }
 
         function logOut() {
+            if (liff.isLoggedIn()) {
+                liff.logout();
+            }
         }
 
         function closed() {
@@ -264,7 +249,7 @@
         }
 
         async function getFriendship() {
-            $('#logFunc').append('<span>Friendship|</span>');
+            $('#logFunc').append('Friendship|');
             await liff.getFriendship().then((data) => {
                 if (data.friendFlag) {
                     // something you want to do
@@ -273,6 +258,27 @@
             });
         }
 
+        async function main() {
+            $('#spVersion').text('V44');
+            await liff
+                .init({
+                    liffId: "2004905818-LqwOoRkn", // Use own liffId
+                })
+                .then(() => {
+                    $('#logFunc').append('main');
+                    // Start to use liff's api
+                    getEnvironment();
+                    getUserProfile();
+                    getContext();
+                    //getFriendship();
+                    // createUniversalLink();
+                })
+                .catch((err) => {
+                    // Error happens during initialization
+                    $('#errorMsg').text("main error, " + err.code + " : " + err.message);
+                });
+        }
+        main();
 
     </script>
 </body>
