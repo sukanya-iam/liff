@@ -63,14 +63,16 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.3');
+            $('#spVersion').text('V38.4');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
                     // Start to use liff's api
-                    getEnvironment();
+
+                    $("#accessToken").append(liff.getAccessToken());
+                    //getEnvironment();
                     //getUserProfile();
                     //getContext();
                 })
