@@ -19,7 +19,6 @@
     <p id="isInClient"><b>isInClient:</b> </p>
     <p id="accessToken"><b>AccessToken:</b> </p>
     <img id="pictureUrl">
-    <p id="pictureUrlSrc"><b>pictureUrl:</b> </p>
     <p id="userId"><b>userId:</b> </p>
     <p id="displayName"><b>displayName:</b> </p>
     <p id="statusMessage"><b>statusMessage:</b> </p>
@@ -55,29 +54,33 @@
         var userProfile = null;
 
         $('#btnShowProfile').click(function () {
-          alert(JSON.stringify(userProfile));
+            alert(JSON.stringify(userProfile));
         });
 
         $('#btnSendNoti').click(function () {
-            $.ajax({
-                type: 'POST',
-                url: 'https://app-scgltruckgo-dev-001.azurewebsites.net/truckgo/appapi/Notification/SendAssigned',
-                data: {
-                    DriverCode: "0822222222",
-                    ShipmentNo: "BTTEST01",
-                    DeliveryNotes: {
-                        OriginName: userProfile.displayName,
-                        ShiptoName: userProfile.statusMessage
-                    }
-                },
-                dataType: "json",
-                success: function (result) {
-                    alert(JSON.stringify(result));
-                },
-                error: function (request, status, error) {
-                    alert(error);
-                },
-            });
+            if (userProfile == null) {
+                alert("userProfile is null");
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://app-scgltruckgo-dev-001.azurewebsites.net/truckgo/appapi/Notification/SendAssigned',
+                    data: {
+                        DriverCode: "0822222222",
+                        ShipmentNo: "BTTEST01",
+                        DeliveryNotes: [{
+                            OriginName: userProfile.displayName,
+                            ShiptoName: userProfile.statusMessage
+                        }]
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        alert("result : " + JSON.stringify(result));
+                    },
+                    error: function (request, status, error) {
+                        alert(request + " | " + status+ " | " + error);
+                    },
+                });
+            }
         });
 
         function createUniversalLink() {
@@ -125,7 +128,6 @@
                         $("#displayName").append(profile.displayName);
                         // เอา url property ของ profile ไปใส่เป็นค่าของ src ใน img tag
                         $("#pictureUrl").attr('src', profile.pictureUrl);
-                        $("#pictureUrlSrc").append(profile.pictureUrl);
                         $("#userId").append(profile.userId);
                         $("#statusMessage").append(profile.statusMessage);
                         // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
@@ -145,9 +147,9 @@
                     alert("getProfile error : " + err);
                 });
         }
-
-        // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
+       
         function getEnvironment() {
+            // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
             // liff เปิดใน android, ios หรือ web
             $("#os").append(liff.getOS());
             // defualt language ของ client
@@ -177,7 +179,7 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V32');
+                    $('#spVersion').text('V33');
                     getEnvironment();
                     getUserProfile();
                     getContext();
