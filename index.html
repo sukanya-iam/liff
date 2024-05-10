@@ -20,7 +20,7 @@
     <p id="version"><b>Version:</b> </p>
     <p id="isInClient"><b>isInClient:</b> </p>
     <p id="accessToken"><b>AccessToken:</b> </p>
-<hr>
+    <hr>
     <h3 class="head-info">Get Profile</h3>
     <img id="pictureUrl">
     <p id="userId"><b>userId:</b> </p>
@@ -63,15 +63,14 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.2');
+            $('#spVersion').text('V38.3');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $("#os").append(liff.getOS());
-                    //getEnvironment();
+                    getEnvironment();
                     //getUserProfile();
                     //getContext();
                 })
@@ -83,29 +82,35 @@
         main();
 
         function getEnvironment() {
-            // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
-            // liff เปิดใน android, ios หรือ web
-            $("#os").append(liff.getOS());
-            // defualt language ของ client
-            $("#language").append(liff.getLanguage());
-            // version ของ liff ที่ถกเปิด
-            $("#version").append(liff.getVersion());
-            // อันนี้เป็นค่าชั่วคราว เพื่อให้เรา access ไปที่หลังบ่านของ LINE ได้
-            $("#accessToken").append(liff.getAccessToken());
-            // ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
-            $("#isInClient").append(liff.isInClient());
-            if (liff.isInClient()) {
-                // TRUE - ค่าสั่ง liff.init ถ้าเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
-                $("#btnLogOut").css('display', 'none');
+            try {
+                // ดึงค่า Language, version, isInClient, AccessToken มาแสดง
+                // liff เปิดใน android, ios หรือ web
+                $("#os").append(liff.getOS());
+                // defualt language ของ client
+                $("#language").append(liff.getLanguage());
+                // version ของ liff ที่ถกเปิด
+                $("#version").append(liff.getVersion());
+                // อันนี้เป็นค่าชั่วคราว เพื่อให้เรา access ไปที่หลังบ่านของ LINE ได้
+                $("#accessToken").append(liff.getAccessToken());
+                // ผู้ใช่เปิด liff จาก LINE หรือ External browser --> จะได้ซ่อน feature แล้วแต่แพล็ตฟอร์มที่เปิดได้
+                $("#isInClient").append(liff.isInClient());
+                if (liff.isInClient()) {
+                    // TRUE - ค่าสั่ง liff.init ถ้าเปิดจากแอพ line มันจะ log in ให้อยู่แล้ว
+                    $("#btnLogOut").css('display', 'none');
+                }
+                else {
+                    // FALSE - 3 ปุมนี้ทำไม่ได้ถ้าเปิดจาก external browser
+                    $("#btnMsg").css('display', 'none');
+                    $("#btnScanCode").css('display', 'none');
+                    $("#btnClose").css('display', 'none');
+                }
             }
-            else {
-                // FALSE - 3 ปุมนี้ทำไม่ได้ถ้าเปิดจาก external browser
-                $("#btnMsg").css('display', 'none');
-                $("#btnScanCode").css('display', 'none');
-                $("#btnClose").css('display', 'none');
+            catch (err) {
+                $('#errorMsg').text("Envi , " + err.message);
             }
+
         }
-        
+
         async function getUserProfile() {
             await liff
                 .getProfile()
@@ -200,7 +205,7 @@
 
         async function sendMsg() {
         }
-        
+
     </script>
 </body>
 
