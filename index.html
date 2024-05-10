@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
     <title>My LIFF app</title>
     <link rel="stylesheet" href="css/style.css" media="all">
 </head>
+
 <body>
+    <button id="btnShowProfile">Profile</button>
+    <button id="btnSendNoti">Send Noti</button>
     <h2 style="color:pink;">Line liff <span id="spVersion"></span></h2>
     <p id="os"><b>OS:</b> </p>
     <p id="language"><b>Language:</b> </p>
@@ -47,6 +52,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
+        var userProfile = null;
+
+        $('#btnShowProfile').click(function () {
+          alert(JSON.stringify(userProfile));
+        });
+
+        $('#btnSendNoti').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '',
+                data: {
+                    MasterData: "Vehicle",
+                    SearchText: carrierCode
+                },
+                dataType: "json",
+                success: function (result) {
+                    alert(JSON.stringify(result));
+                },
+                error: function (request, status, error) {
+                    alertTextVerify(error, "red");
+                },
+            });
+        });
+
         function createUniversalLink() {
         }
 
@@ -97,6 +126,13 @@
                         $("#statusMessage").append(profile.statusMessage);
                         // email เป็นค่าที่อยู่ใน openId เลยต้องไปตั้งค่า scope ใน console ด้วย
                         $("#decodedIDToken").append(liff.getDecodedIDToken().email);
+
+                        userProfile = {
+                            userId: profile.userId,
+                            displayName: profile.displayName,
+                            pictureUrl: profile.pictureUrl,
+                            email: liff.getDecodedIDToken().email
+                        }
                     } else {
                         alert("profile null");
                     }
@@ -137,7 +173,7 @@
                 })
                 .then(() => {
                     // Start to use liff's api
-                    $('#spVersion').text('V30');
+                    $('#spVersion').text('V31');
                     getEnvironment();
                     getUserProfile();
                     getContext();
@@ -150,4 +186,5 @@
         main()
     </script>
 </body>
+
 </html>
