@@ -47,8 +47,8 @@
     <button id="btnMsg" onclick="sendMsg()">Send Message</button>
     <label>shareMsg : <span id="logShareMsg"></span></label>
     <button id="btnShare" onclick="shareMsg()">Share Target Picker</button>
-    <button onclick="openWindow()">Open Window</button>
     <button id="btnScanCode" onclick="scanCode()">Scan Code</button>
+    <button onclick="openWindow()">Open Window</button>
     <button id="btnLogOut" onclick="logOut()">Log Out</button>
     <button id="btnClose" onclick="closed()">Close</button>
 
@@ -64,7 +64,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V39');
+            $('#spVersion').text('V40');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
@@ -180,8 +180,12 @@
         function createUniversalLink() {
         }
 
+        async function sendMsg() {
+
+        }
+
         async function shareMsg() {
-            liff
+            await liff
                 .shareTargetPicker(
                     [
                         {
@@ -196,7 +200,7 @@
                 .then(function (res) {
                     if (res) {
                         // succeeded in sending a message through TargetPicker
-                       $('#logShareMsg').text(`[${res.status}] Message sent!`);
+                        $('#logShareMsg').text(`[${res.status}] Message sent!`);
                     } else {
                         // sending message canceled
                         $('#logShareMsg').text("TargetPicker was closed!");
@@ -208,23 +212,30 @@
                 });
         }
 
+        async function scanCode() {
+            await liff
+                .scanCodeV2()
+                .then((result) => {
+                    // result = { value: "" }
+                    $('#scanCode').append(result)
+                })
+                .catch((error) => {
+                    $('#errorMsg').text("scanCode is error, ", error);
+                });
+        }
+
+        function openWindow() {
+        }
+
         function logOut() {
         }
 
         function closed() {
         }
 
-        async function scanCode() {
-        }
-
-        function openWindow() {
-        }
-
         async function getFriendship() {
         }
 
-        async function sendMsg() {
-        }
 
     </script>
 </body>
