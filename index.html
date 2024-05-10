@@ -63,16 +63,17 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V35');
+            $('#spVersion').text('V36');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
+                    location.replace("https://line.me/2004905818-LqwOoRkn/path/index?param=bt");
                     // Start to use liff's api
-                    getEnvironment();
-                    getUserProfile();
-                    getContext();
+                    //getEnvironment();
+                    //getUserProfile();
+                    //getContext();
                 })
                 .catch((err) => {
                     // Error happens during initialization
