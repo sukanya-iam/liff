@@ -16,7 +16,7 @@
 <body>
     <div class="card" style="width: 18rem; margin: auto auto; margin-top: 15px;">
         <div class="card-body">
-            <h5 class="card-title">ลงทะเบียน V1</h5>
+            <h5 class="card-title">ลงทะเบียน V47.6</h5>
             <form>
                 <div class="row">
                     <label class="col-form-label col-12" for="username">ชื่อ</label>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="row my-3">
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary col-12" type="button" id="btnRegister">ลงทะเบียน</button>
+                        <button class="btn btn-primary col-12" type="button" id="btnRegister" style="display: none;">ลงทะเบียน</button>
                     </div>
                 </div>
                 <div class="row">
@@ -81,6 +81,7 @@
                             displayName: profile.displayName,
                             pictureUrl: profile.pictureUrl
                         }
+                        $('#btnRegister').show();
                     } else {
                         $('#errorMsg').text("profile null");
                     }
