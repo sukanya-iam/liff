@@ -16,7 +16,7 @@
 <body>
     <div class="card" style="width: 18rem; margin: auto auto; margin-top: 15px;">
         <div class="card-body">
-            <h5 class="card-title">ลงทะเบียน V48</h5>
+            <h5 class="card-title">ลงทะเบียน V49</h5>
             <form>
                 <div class="row">
                     <label class="col-form-label col-12" for="username">ชื่อ</label>
@@ -34,12 +34,13 @@
                 </div>
                 <div class="row my-3">
                     <div class="col-12 text-center">
-                        <button class="btn btn-primary col-12" type="button" id="btnRegister" style="display: none;">ลงทะเบียน</button>
+                        <button class="btn btn-primary col-12" type="button" id="btnRegister"
+                            style="display: none;">ลงทะเบียน</button>
                     </div>
                 </div>
                 <button class="btn btn-secondary col-12" type="button" id="btnRegisterX">ลงทะเบียน</button>
-                <div class="row">
-                    <img id="pictureUrl">
+                <div class="row mt-2" id="dvClick">
+                    <img id="pictureUrl" style="width: 20px; height: 20px; border-radius: 50%;">
                     <p id="userId"><b>userId:</b> </p>
                     <p id="displayName"><b>displayName:</b> </p>
                 </div>
@@ -122,6 +123,16 @@
             });
 
         });
+
+        $('#dvClick').click(function () {
+            if (userProfile != null) {
+                navigator.clipboard.writeText(userProfile.userId);
+                alert("Copied the text: " + userProfile.userId);
+            }else{
+                alert("user id is null");
+            }
+        });
+
     </script>
 </body>
 
