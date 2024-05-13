@@ -16,7 +16,7 @@
 <body>
     <div class="card" style="width: 18rem; margin: auto auto; margin-top: 15px;">
         <div class="card-body">
-            <h5 class="card-title">ลงทะเบียน V47.6</h5>
+            <h5 class="card-title">ลงทะเบียน V47.6.1</h5>
             <form>
                 <div class="row">
                     <label class="col-form-label col-12" for="username">ชื่อ</label>
@@ -37,6 +37,7 @@
                         <button class="btn btn-primary col-12" type="button" id="btnRegister" style="display: none;">ลงทะเบียน</button>
                     </div>
                 </div>
+                <button class="btn btn-secondary col-12" type="button" id="btnRegisterX">ลงทะเบียน</button>
                 <div class="row">
                     <img id="pictureUrl">
                     <p id="userId"><b>userId:</b> </p>
@@ -101,12 +102,26 @@
                     liff.closeWindow();
                 },
                 error: function (xhr, status, error) {
-                    alert(xhr + "|" + status);
+                    alert(JSON.stringify(xhr) + "|" + status);
                 }
             });
 
         });
+        $('#btnRegisterX').click(function () {
+            $.ajax({
+                url: 'https://192.168.1.114/webtestbt/Home/Register/Ub198aefb65c698ebd3856438852a4fc6',
+                type: 'GET',
+                cache: false,
+                dataType: 'json',
+                success: function (result) {
+                    liff.closeWindow();
+                },
+                error: function (xhr, status, error) {
+                    alert(JSON.stringify(xhr) + "|" + status);
+                }
+            });
 
+        });
     </script>
 </body>
 
