@@ -64,28 +64,28 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V47.6.1');
+            $('#spVersion').text('V48');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
                     // Start to use liff's api
-                    liff.getProfile()
-                        .then((profile) => {
-                            if (profile != null) {
-                                location.href = "https://liff.line.me/2004905818-4YBjklwz";
-                            } else {
-                                $('#errorMsg').text("profile null");
-                            }
-                        })
-                        .catch((err) => {
-                            $('#errorMsg').text("getProfile() is error , " + err);
-                        });
+                    // liff.getProfile()
+                    //     .then((profile) => {
+                    //         if (profile != null) {
+                    //             location.href = "https://liff.line.me/2004905818-4YBjklwz";
+                    //         } else {
+                    //             $('#errorMsg').text("profile null");
+                    //         }
+                    //     })
+                    //     .catch((err) => {
+                    //         $('#errorMsg').text("getProfile() is error , " + err);
+                    //     });
 
-                    //getEnvironment();
-                    //getUserProfile();
-                    //getContext();
+                    getEnvironment();
+                    getUserProfile();
+                    getContext();
                 })
                 .catch((err) => {
                     // Error happens during initialization
