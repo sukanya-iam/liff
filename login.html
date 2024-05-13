@@ -92,20 +92,8 @@
 
         $('#btnRegister').click(function () {
             $.ajax({
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader('Authorization', 'Bearer IkcBQVPYr5HpA8jN6sxa8kWsVhVq4Mhx4QH/I+S8R0mpRumj/HsXHQm5OQ8qQNsnmFYQ4Dr00/+LEipSOME5IgAOmE3HU/uNaJn/olFNseuhu20iJrwNFGMyJqQ1dFKAJAKMWU+vcV8/iMz1h/XwJAdB04t89/1O/w1cDnyilFU=');
-                },
-                url: 'https://api.line.me/v2/bot/message/push',
-                type: 'POST',
-                data: {
-                    "to": userProfile.userId,
-                    "messages": [
-                        {
-                            "type": "text",
-                            "text": "ลงทะเบียนสำเร็จ"
-                        }
-                    ]
-                },
+                url: 'https://193.168.1.114/webtestbt/Home/Register/' + userProfile.userId,
+                type: 'GET',
                 cache: false,
                 dataType: 'json',
                 success: function (result) {
