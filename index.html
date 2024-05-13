@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
-    <title>My LIFF app</title>
+    <title>Home</title>
     <link rel="stylesheet" href="css/style.css" media="all">
 </head>
 
@@ -64,16 +64,31 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V38.9');
+            $('#spVersion').text('V47');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
                 })
                 .then(() => {
                     // Start to use liff's api
-                    getEnvironment();
-                    getUserProfile();
-                    getContext();
+                    liff.getProfile()
+                        .then((profile) => {
+                            if (profile != null) {
+                                liff.openWindow({
+                                    url: "https://192.168.1.114/webtestbt/Home/index?id=" + profile.userId,
+                                    external: true,
+                                });
+                            } else {
+                                $('#errorMsg').text("profile null");
+                            }
+                        })
+                        .catch((err) => {
+                            $('#errorMsg').text("getProfile() is error , " + err);
+                        });
+
+                    //getEnvironment();
+                    //getUserProfile();
+                    //getContext();
                 })
                 .catch((err) => {
                     // Error happens during initialization
