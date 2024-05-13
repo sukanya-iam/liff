@@ -109,10 +109,13 @@
                 cache: false,
                 dataType: 'json',
                 success: function (result) {
-                    result;
+                    liff.closeWindow();
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr + "|" + status);
                 }
             });
-            liff.closeWindow();
+
         });
 
     </script>
