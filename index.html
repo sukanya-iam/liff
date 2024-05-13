@@ -64,7 +64,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V47');
+            $('#spVersion').text('V47.1');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
@@ -75,7 +75,7 @@
                         .then((profile) => {
                             if (profile != null) {
                                 liff.openWindow({
-                                    url: "https://192.168.1.114/webtestbt/Home/index?id=" + profile.userId,
+                                    url: "https://liff.line.me/2004905818-4YBjklwz",
                                     external: true,
                                 });
                             } else {
