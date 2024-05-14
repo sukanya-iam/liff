@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div style="color: gray; text-align: center;">V001</div>
+    <div style="color: gray; text-align: center;">V002</div>
     <div class="card" id="dvDetail" style="width: 18rem; margin: auto auto; margin-top: 15px; display: none;">
         <div class="card-body">
             <h5 class="card-title">กรุณาคัดลอกรหัสผู้ใช้เพื่อลงทะเบียน</h5>
@@ -85,7 +85,7 @@
         $('#btnCopyUserId').click(function () {
             if (userProfile != null) {
                 navigator.clipboard.writeText(userProfile.userId);
-                alert("คัดลอก " + userProfile.userId + " ลงคลิปบอร์ดแล้ว");
+                //alert("คัดลอก " + userProfile.userId + " ลงคลิปบอร์ดแล้ว");
             }else{
                 alert("ไม่พบรหัสผู้ใช้งาน");
             }
