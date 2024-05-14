@@ -29,7 +29,7 @@
     <script>
         var userProfile = null;
         async function main() {
-            $('#spVersion').text('003');
+            $('#spVersion').text('004');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn"
@@ -50,7 +50,7 @@
                     if (profile != null && $('#txtUserName').val() != "B") {
                         location.replace("https://liff.line.me/2004905818-ELaxvjQz");
                     } else {
-                        $('#errorMsg').text("profile null");
+                        $('#errorMsg').text("Already registered");
                     }
                 })
                 .catch((err) => {
