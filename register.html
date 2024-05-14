@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div style="color: gray; text-align: center;">V002</div>
+    <div style="color: gray; text-align: center;">V003</div>
     <div class="card" id="dvDetail" style="width: 18rem; margin: auto auto; margin-top: 15px; display: none;">
         <div class="card-body">
             <h5 class="card-title">กรุณาคัดลอกรหัสผู้ใช้เพื่อลงทะเบียน</h5>
@@ -26,6 +26,11 @@
             <div class="row mt-3">
                 <div class="col-12 text-center">
                     <button class="btn btn-primary col-12" type="button" id="btnCopyUserId">คัดลอกรหัส</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <button class="btn btn-secondary col-12" type="button" id="btnGoToHome">หน้าหลัก</button>
                 </div>
             </div>
         </div>
@@ -81,7 +86,6 @@
                 });
         }
 
-
         $('#btnCopyUserId').click(function () {
             if (userProfile != null) {
                 navigator.clipboard.writeText(userProfile.userId);
@@ -89,6 +93,10 @@
             }else{
                 alert("ไม่พบรหัสผู้ใช้งาน");
             }
+        });
+
+        $('#btnGoToHome').click(function () {
+            location.replace("https://line.me/2004905818-LqwOoRkn");
         });
 
     </script>
