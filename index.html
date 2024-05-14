@@ -29,20 +29,13 @@
     <script>
         var userProfile = null;
         async function main() {
-            $('#spVersion').text('002');
+            $('#spVersion').text('003');
             await liff
                 .init({
-                    liffId: "2004905818-LqwOoRkn",
-                    withLoginOnExternalBrowser: true
+                    liffId: "2004905818-LqwOoRkn"
                 })
                 .then(() => {
-                    //Start to use liff's api
-                    if (liff.isLoggedIn()) {
-                       
-                    } else {
-                        liff.login();
-                    }
-
+                    getUserProfile();
                 })
                 .catch((err) => {
                     // Error happens during initialization
