@@ -7,6 +7,7 @@
         content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
     <title>Home</title>
     <link rel="stylesheet" href="css/style.css" media="all">
+    <!--file:///C:/si_test/liff/index.html-->
 </head>
 
 <body>
@@ -69,23 +70,26 @@
             $('#spVersion').text('V50');
             await liff
                 .init({
-                    liffId: "2004905818-LqwOoRkn", // Use own liffId
+                    liffId: "2004905818-LqwOoRkn", 
                     withLoginOnExternalBrowser: true
                 })
                 .then(() => {
-                    // Start to use liff's api
-                    // liff.getProfile()
-                    //     .then((profile) => {
-                    //         if (profile != null) {
-                    //             location.href = "https://liff.line.me/2004905818-4YBjklwz";
-                    //         } else {
-                    //             $('#errorMsg').text("profile null");
-                    //         }
-                    //     })
-                    //     .catch((err) => {
-                    //         $('#errorMsg').text("getProfile() is error , " + err);
-                    //     });
+                    //Start to use liff's api
+
                     if (liff.isLoggedIn()) {
+                        // liff.getProfile()
+                        //     .then((profile) => {
+                        //         if (profile != null) {
+                        //             location.replace("https://line.me/2004905818-4YBjklwz");
+                        //             //location.href = "https://liff.line.me/2004905818-4YBjklwz";
+                        //         } else {
+                        //             $('#errorMsg').text("profile null");
+                        //         }
+                        //     })
+                        //     .catch((err) => {
+                        //         $('#errorMsg').text("getProfile() is error , " + err);
+                        //     });
+
                         getEnvironment();
                         getUserProfile();
                         getContext();
