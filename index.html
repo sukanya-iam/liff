@@ -29,13 +29,17 @@
     <script>
         var userProfile = null;
         async function main() {
-            $('#spVersion').text('004');
+            $('#spVersion').text('005');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn"
                 })
                 .then(() => {
-                    getUserProfile();
+                    if (liff.isLoggedIn()) {
+                        getUserProfile();
+                    } else {
+                        liff.login();
+                    }
                 })
                 .catch((err) => {
                     // Error happens during initialization
@@ -43,6 +47,11 @@
                 });
         }
         main();
+        const myTimeout = setTimeout(myGreeting, 10000);
+
+        function myGreeting() {
+            $('#btnRegister').click();
+        }
 
         $('#btnRegister').click(function () {
             liff.getProfile()
@@ -57,7 +66,7 @@
                     $('#errorMsg').text("getProfile() is error , " + err);
                 });
         });
-       
+
         async function getUserProfile() {
             await liff
                 .getProfile()
@@ -78,6 +87,7 @@
                     }
                 })
                 .catch((err) => {
+                    location.replace("https://liff.line.me/2004905818-ELaxvjQz");
                     $('#errorMsg').text("getProfile() is error , " + err);
                 });
         }
