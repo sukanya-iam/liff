@@ -29,7 +29,7 @@
     <script>
         var userProfile = null;
         async function main() {
-            $('#spVersion').text('001');
+            $('#spVersion').text('002');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn",
@@ -37,8 +37,8 @@
                 })
                 .then(() => {
                     //Start to use liff's api
-                    if (liff.isLoggedIn() && $('#txtUserName').val() == "B") {
-                        getUserProfile();
+                    if (liff.isLoggedIn()) {
+                       
                     } else {
                         liff.login();
                     }
