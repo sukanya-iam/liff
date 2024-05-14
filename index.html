@@ -59,15 +59,18 @@
     </script> -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="js/liff-v2-sdk.js"></script>
+    <!-- <script src="js/liff-v2-sdk.js"></script> -->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
     <script>
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V49');
+            $('#spVersion').text('V50');
             await liff
                 .init({
                     liffId: "2004905818-LqwOoRkn", // Use own liffId
+                    withLoginOnExternalBrowser: true
                 })
                 .then(() => {
                     // Start to use liff's api
@@ -82,10 +85,14 @@
                     //     .catch((err) => {
                     //         $('#errorMsg').text("getProfile() is error , " + err);
                     //     });
+                    if (liff.isLoggedIn()) {
+                        getEnvironment();
+                        getUserProfile();
+                        getContext();
+                    } else {
+                        liff.login();
+                    }
 
-                    getEnvironment();
-                    getUserProfile();
-                    getContext();
                 })
                 .catch((err) => {
                     // Error happens during initialization
@@ -182,6 +189,7 @@
         }
 
         function logOut() {
+            liff.logout();
         }
 
         function closed() {
