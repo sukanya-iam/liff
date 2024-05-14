@@ -73,7 +73,7 @@
                         }
                         $('#dvDetail').show();
                     } else {
-                        $('#errorMsg').text("Profile is not found");
+                        $('#errorMsg').text("ไม่พบโปรไฟล์");
                     }
                 })
                 .catch((err) => {
@@ -85,9 +85,9 @@
         $('#btnCopyUserId').click(function () {
             if (userProfile != null) {
                 navigator.clipboard.writeText(userProfile.userId);
-                alert("Copied the text: " + userProfile.userId);
+                alert("คัดลอก " + userProfile.userId + " ลงคลิปบอร์ดแล้ว");
             }else{
-                alert("User Id is not found");
+                alert("ไม่พบรหัสผู้ใช้งาน");
             }
         });
 
