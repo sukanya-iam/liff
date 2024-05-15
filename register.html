@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div style="color: gray; text-align: center;">V006</div>
+    <div style="color: gray; text-align: center;">V007</div>
     <div class="card" id="dvDetail" style="width: 18rem; margin: auto auto; margin-top: 15px; display: none;">
         <div class="card-body">
             <h5 class="card-title">กรุณาคัดลอกรหัสผู้ใช้เพื่อลงทะเบียน</h5>
@@ -109,7 +109,13 @@
             $('#btnLogOut').click(function () {
                 if (liff.isLoggedIn()) {
                     liff.logout();
+                    if (liff.getContext().type == "external") {
+                        window.close();
+                    } else {
+                        liff.closeWindow();
+                    }
                 }
+                $('#dvDetail').hide();
             });
 
         </script>
