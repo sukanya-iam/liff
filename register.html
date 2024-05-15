@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div style="color: gray; text-align: center;">V004</div>
+    <div style="color: gray; text-align: center;">V005</div>
     <div class="card" id="dvDetail" style="width: 18rem; margin: auto auto; margin-top: 15px; display: none;">
         <div class="card-body">
             <h5 class="card-title">กรุณาคัดลอกรหัสผู้ใช้เพื่อลงทะเบียน</h5>
@@ -76,6 +76,9 @@
                                 pictureUrl: profile.pictureUrl
                             }
                             $('#dvDetail').show();
+                            if (liff.getContext().type == "external") {
+                                $('#btnClose').hide();
+                            }
                         } else {
                             $('#errorMsg').text("ไม่พบโปรไฟล์");
                         }
