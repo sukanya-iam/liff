@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div style="color: gray; text-align: center;">V005</div>
+    <div style="color: gray; text-align: center;">V006</div>
     <div class="card" id="dvDetail" style="width: 18rem; margin: auto auto; margin-top: 15px; display: none;">
         <div class="card-body">
             <h5 class="card-title">กรุณาคัดลอกรหัสผู้ใช้เพื่อลงทะเบียน</h5>
@@ -31,6 +31,11 @@
             <div class="row mt-3">
                 <div class="col-12 text-center">
                     <button class="btn btn-secondary col-12" type="button" id="btnClose">ปิด</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <button class="btn btn-secondary col-12" type="button" id="btnLogOut">ลงชื่อออก</button>
                 </div>
             </div>
         </div>
@@ -99,6 +104,12 @@
 
             $('#btnClose').click(function () {
                 liff.closeWindow();
+            });
+
+            $('#btnLogOut').click(function () {
+                if (liff.isLoggedIn()) {
+                    liff.logout();
+                }
             });
 
         </script>
