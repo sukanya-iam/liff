@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+    <title>Test api</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style type="stylesheet">
+
+    </style>
+</head>
+
+<body>
+    <button class="btn btn-primary col-12" type="button" id="btnRegister" style="display: none;">test</button>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $('#btnRegister').click(function () {
+            $.ajax({
+                url: 'https://192.168.1.114/webtestbt/Home/Register/' + 'baitong',
+                type: 'GET',
+                cache: false,
+                dataType: 'json',
+                success: function (result) {
+                    alert('success');
+                },
+                error: function (xhr, status, error) {
+                    alert(JSON.stringify(xhr) + "|" + status);
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>
