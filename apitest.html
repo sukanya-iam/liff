@@ -20,12 +20,12 @@
     <script>
         $('#btnRegister').click(function () {
             $.ajax({
-                url: 'https://192.168.1.114/webtestbt/Home/Register/' + 'baitong',
+                url: 'https://192.168.1.114/webtestbt/Line/Register/' + 'baitong',
                 type: 'GET',
                 cache: false,
                 dataType: 'json',
                 success: function (result) {
-                    alert('success');
+                    alert(JSON.stringify(result));
                 },
                 error: function (xhr, status, error) {
                     alert(JSON.stringify(xhr) + "|" + status);
