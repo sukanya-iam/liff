@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover"
+    />
+    <title>Accept</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      body {
+        background-color: #e8e7e7;
+      }
+
+      .sm-header-box {
+        padding: 5px 5px 0 5px;
+      }
+
+      .sm-header-box .card {
+        border: unset;
+      }
+
+      .sm-header-box .card .card-body {
+        padding: 5px 12px;
+        font-size: 14px;
+      }
+
+      .sm-header-box .card .card-body span {
+        font-weight: 600;
+      }
+
+      .sm-header-box .card .card-body div span {
+        color: #6d6d6d;
+        font-weight: unset;
+      }
+
+      .sm-filter-btn {
+        background-color: #e2f0ff;
+        color: #007aff;
+        font-size: 20px;
+        width: 100%;
+        height: 100%;
+        transition: 0.3s;
+      }
+
+      .sm-filter-btn:hover {
+        background-color: #007aff;
+        color: #fff;
+        font-size: 20px;
+        width: 100%;
+        height: 100%;
+      }
+
+      .title-detail {
+        color: #6d6d6d;
+      }
+
+      .sm-box {
+        padding: 5px 5px 0 5px;
+      }
+
+      .sm-box > .card {
+        border-color: #007aff;
+      }
+
+      .sm-box .card .card-body {
+        padding: 12px 12px 0 12px;
+      }
+
+      .sm-box .card .card-subtitle {
+        color: #102a71;
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 2px;
+      }
+
+      .sm-box .card .card-title {
+        margin-bottom: 0;
+      }
+
+      .sm-box .card .card-text {
+        color: #323232;
+        font-size: 14px;
+      }
+
+      .sm-box .card .card-footer {
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .sm-box .card .card-footer .collapse-icon::before {
+        font: normal normal normal 14px / 1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .sm-box .card .card-footer[aria-expanded="false"] {
+        background-color: #e2f0ff;
+        color: #6d6d6d;
+        border: unset;
+      }
+
+      .sm-box .card .card-footer[aria-expanded="false"] .collapse-icon::before {
+        content: "\f107";
+      }
+
+      .sm-box .card .card-footer[aria-expanded="true"] {
+        background-color: #007aff;
+        color: white;
+      }
+
+      .sm-box .card .card-footer[aria-expanded="true"] .collapse-icon::before {
+        content: "\f106";
+      }
+
+      .sm-box .card .card-footer[aria-expanded="true"] .card-text {
+        color: white !important;
+      }
+
+      .dn-detail {
+        background-color: #e2f0ff;
+      }
+
+      .dn-detail .card-title {
+        color: #000;
+        font-size: 18px;
+        margin-left: 5px;
+      }
+
+      .dn-detail .card-subtitle {
+        color: #6d6d6d !important;
+        font-size: 14px;
+        margin-top: 2px !important;
+        white-space: nowrap;
+      }
+
+      .dn-detail .dn-number {
+        color: #007aff;
+        margin-top: 2px;
+        font-weight: 400;
+      }
+
+      .dn-detail .card-icon {
+        color: #323232;
+        margin-right: 5px;
+      }
+
+      .btn-save {
+        border-color: #007aff;
+        color: #007aff;
+        width: 25%;
+        transition: 0.3s;
+      }
+
+      .btn-save:hover {
+        background-color: #007aff;
+        color: #fff;
+      }
+
+      .form-select {
+        width: 73%;
+      }
+
+      .card-icon > i {
+        font-size: 14px;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+      }
+
+      .filter-page-hide {
+        position: fixed;
+        top: 57px;
+        right: -2000px;
+        transition: 0.6s;
+      }
+
+      .filter-page-show {
+        position: fixed;
+        top: 57px;
+        right: 147px;
+        transition: 0.6s;
+      }
+
+      #filterPage {
+        width: 178vh;
+      }
+
+      #filterPage .card {
+        height: 80vh;
+      }
+
+      @media screen and (max-width: 1024px) {
+        .filter-page-show {
+          right: 40px;
+        }
+
+        #filterPage {
+          width: 99vh;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="row">
+            <div class="col-sm-10 sm-header-box">
+              <div class="card">
+                <div class="card-body">
+                  <span>10001234 : Example Transportt Co., Ltd.</span><br />
+                  <div class="d-flex justify-content-between">
+                    <span>Total Shipment: 4</span>
+                    <span>Filter: 3</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-2 sm-header-box">
+              <button class="btn sm-filter-btn" id="btnFilter">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="sm-box col-12 col-md-6" id="dvShipment">
+          <!-- <div class="card">
+            <div class="card-body">
+              <div class="sm-detail mb-2">
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">Shipment No.</p>
+                  <h5 class="card-title text-end">2024080505</h5>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">Tender Date</p>
+                  <p class="card-text text-end">01/08/2024 11:34:45</p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">TMS Description</p>
+                  <p class="card-text text-end">
+                    Test accept by queue 06082024
+                  </p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">Truck Type</p>
+                  <p class="card-text text-end">22CS</p>
+                </div>
+
+                <div class="d-flex justify-content-between mt-1">
+                  <select name="" id="" class="form-select text-center">
+                    <option value="" selected>--- เลือกพนักงานชับรถ ---</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <button class="btn btn-save">บันทึก</button>
+                </div>
+              </div>
+
+              <div class="dn-detail row collapse" id="collapse2024080505">
+                <div class="col-12 my-2">
+                  <div class="box-quene">
+                    <div class="d-flex justify-content-between">
+                      <label class="dn-number">No. 1</label>
+                      <div>
+                        <span class="card-subtitle">Delivery No.</span>
+                        <label class="card-title text-end">H2342482936</label>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-calendar"></i></span
+                        >Plan load Date
+                      </p>
+                      <p class="card-text text-end">01/08/2024 11:34:45</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-circle-thin"></i></span
+                        >Origin
+                      </p>
+                      <p class="card-text text-end">โรงงาน ปูนฯผง-เขาวง</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-map-marker"></i></span
+                        >Destination
+                      </p>
+                      <p class="card-text text-end">บผว.หนองแคระพีพัฒน์</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-square"></i></span
+                        >Commodity
+                      </p>
+                      <p class="card-text text-end">BulkGrey</p>
+                    </div>
+                  </div>
+
+                  <hr />
+                  <div class="box-quene">
+                    <div class="d-flex justify-content-between">
+                      <label class="dn-number">No. 2</label>
+                      <div>
+                        <span class="card-subtitle">Delivery No.</span>
+                        <label class="card-title text-end">H2342482937</label>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-calendar"></i></span
+                        >Plan load Date
+                      </p>
+                      <p class="card-text text-end">02/08/2024 11:20:00</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-circle-thin"></i></span
+                        >Origin
+                      </p>
+                      <p class="card-text text-end">โรงงานใหม่</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-map-marker"></i></span
+                        >Destination
+                      </p>
+                      <p class="card-text text-end">บผว.หนองแคระพีพัฒน์</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-square"></i></span
+                        >Commodity
+                      </p>
+                      <p class="card-text text-end">BulkGrey</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="card-footer"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse2024080505"
+              aria-expanded="false"
+              aria-controls="collapse2024080505"
+            >
+              <label
+                ><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination
+                )</label
+              >
+              <span class="collapse-icon"></span>
+            </div>
+          </div> -->
+        </div>
+
+        <div class="sm-box col-12 col-sm-12 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+              <p class="card-text">
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row filter-page-hide" id="filterPage">
+        <div class="sm-box col-6">
+          <div class="card">
+            <div class="card-body">
+              <h4>Filter</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      charset="utf-8"
+      src="https://static.line-scdn.net/liff/edge/2/sdk.js"
+    ></script>
+
+    <script>
+      var dataList = [
+        {
+          shipmentNo: "2024080505",
+          tenderDate: "01/08/2024 11:34:45",
+          description: "Test accept by queue 06082024",
+          truckType: "22CS",
+          items: [
+            {
+              deliveryNo: "H2342482936",
+              planLoadDate: "02/08/2024 08:00:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              description: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+            {
+              deliveryNo: "H2342482937",
+              planLoadDate: "02/08/2024 11:20:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              description: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+          ],
+        },
+        {
+          shipmentNo: "2024080509",
+          tenderDate: "01/08/2024 13:34:45",
+          description: "Test accept by queue 06082024",
+          truckType: "22CS",
+          items: [
+            {
+              deliveryNo: "H2342482936",
+              planLoadDate: "02/08/2024 08:00:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              description: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+            {
+              deliveryNo: "H2342482937",
+              planLoadDate: "02/08/2024 11:20:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              description: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+          ],
+        },
+        {
+          shipmentNo: "2024080511",
+          tenderDate: "01/08/2024 13:34:45",
+          description: "Test accept by queue 06082024",
+          truckType: "22CS",
+          items: [
+            {
+              deliveryNo: "H2342482936",
+              planLoadDate: "02/08/2024 08:00:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              description: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+            {
+              deliveryNo: "H2342482937",
+              planLoadDate: "02/08/2024 11:20:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              description: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+          ],
+        },
+      ];
+
+      $(document).ready(function () {
+        bildingSipment();
+      });
+
+      $("#btnFilter").click(function () {
+        if ($("#filterPage").hasClass("filter-page-show")) {
+          $("#filterPage").attr("class", "row filter-page-hide");
+        } else {
+          $("#filterPage").attr("class", "row filter-page-show");
+        }
+      });
+
+      function bildingSipment() {
+        var html = "";
+        if (dataList.length > 0) {
+          for (let i = 0; i < dataList.length; i++) {
+            const data = dataList[i];
+
+            html += `<div class="card mb-2">
+            <div class="card-body">
+            <div class="sm-detail mb-2">
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">Shipment No.</p>
+                  <h5 class="card-title text-end">${data.shipmentNo}</h5>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">Tender Date</p>
+                  <p class="card-text text-end">${data.tenderDate}</p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">TMS Description</p>
+                  <p class="card-text text-end">
+                  ${data.description}
+                  </p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                  <p class="card-subtitle">Truck Type</p>
+                  <p class="card-text text-end">${data.truckType}</p>
+                </div>
+
+                <div class="d-flex justify-content-between mt-1">
+                  <select name="" id="" class="form-select text-center">
+                    <option value="" selected>--- เลือกพนักงานชับรถ ---</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <button class="btn btn-save">บันทึก</button>
+                </div>
+              </div>`;
+
+            html += `<div class="dn-detail row collapse" id="collapse${data.shipmentNo}">`;
+            html += bildingDn(data.items, data.shipmentNo);
+
+            html += `</div></div><div
+              class="card-footer"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse${data.shipmentNo}"
+              aria-expanded="false"
+              aria-controls="collapse${data.shipmentNo}"
+            >
+              <label
+                ><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination
+                )</label
+              >
+              <span class="collapse-icon"></span>
+            </div>
+            </div>
+          </div>`;
+          }
+
+          $("#dvShipment").append(html);
+        }
+      }
+
+      function bildingDn(dataDn, sm) {
+        var html = "";
+
+        if (dataDn.length > 0) {
+          for (let i = 0; i < dataDn.length; i++) {
+            const data = dataDn[i];
+
+            html += `
+                <div class="col-12 my-2">
+                  <div class="box-quene">
+                    <div class="d-flex justify-content-between">
+                      <label class="dn-number">No. ${i + 1}</label>
+                      <div>
+                        <span class="card-subtitle">Delivery No.</span>
+                        <label class="card-title text-end">${
+                          data.deliveryNo
+                        }</label>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-calendar"></i></span
+                        >Plan load Date
+                      </p>
+                      <p class="card-text text-end">${data.planLoadDate}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-circle-thin"></i></span
+                        >Origin
+                      </p>
+                      <p class="card-text text-end">${data.origin}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-map-marker"></i></span
+                        >Destination
+                      </p>
+                      <p class="card-text text-end">${data.destination}</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <p class="card-subtitle">
+                        <span class="card-icon"
+                          ><i class="fa fa-square"></i></span
+                        >Commodity
+                      </p>
+                      <p class="card-text text-end">${data.commodity}</p>
+                    </div>
+                  </div>
+                  </div>`;
+
+            if (i != dataDn.length - 1) {
+              html += `<div class="col-12"><hr class="m-0"/></div>`;
+            }
+          }
+        }
+        return html;
+      }
+    </script>
+  </body>
+</html>
