@@ -20,47 +20,47 @@
         background-color: #e8e7e7;
       }
 
-      .sm-header-box {
-        padding: 5px 5px 0 5px;
+      .header-row {
+        margin: 10px -6px 0px -5px;
+        display: flex;
+        justify-content: space-between;
       }
 
-      .sm-header-box .card {
-        border: unset;
-      }
-
-      .sm-header-box .card .card-body {
-        padding: 5px 12px;
+      .header-box {
         font-size: 14px;
+        padding: 2px 12px;
+        height: 45px;
+        width: calc(100% - 51px);
+        background-color: white;
+        border-radius: 7px;
+        overflow: hidden;
       }
 
-      .sm-header-box .card .card-body span {
-        font-weight: 400;
+      .header-text {
+        color: #000;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
 
-      .sm-header-box .card .card-body div span {
+      .header-detail {
+        display: flex;
+        justify-content: space-between;
         color: #6d6d6d;
-        font-weight: unset;
       }
 
-      .sm-filter-btn {
+      .filter-box {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        width: 45px;
         background-color: #e2f0ff;
+        border-radius: 7px;
+        font-size: 22px;
         color: #007aff;
-        font-size: 20px;
-        width: 100%;
-        height: 100%;
-        transition: 0.3s;
-      }
-
-      .sm-filter-btn:hover {
-        background-color: #007aff;
-        color: #fff;
-        font-size: 20px;
-        width: 100%;
-        height: 100%;
-      }
-
-      .title-detail {
-        color: #6d6d6d;
       }
 
       .sm-box {
@@ -96,6 +96,7 @@
         cursor: pointer;
         display: flex;
         justify-content: space-between;
+        padding: 5px 12px;
       }
 
       .sm-box .card .card-footer .collapse-icon::before {
@@ -160,7 +161,9 @@
         border-color: #007aff;
         color: #007aff;
         width: 25%;
+        height: 32px;
         transition: 0.3s;
+        font-size: 14px;
       }
 
       .btn-save:hover {
@@ -168,8 +171,11 @@
         color: #fff;
       }
 
-      .form-select {
+      #dvShipment .form-select {
         width: 73%;
+        font-size: 14px;
+        padding: 5px 12px;
+        height: 32px;
       }
 
       .card-icon > i {
@@ -179,242 +185,52 @@
         text-align: center;
       }
 
-      .filter-page-hide {
-        position: fixed;
-        top: 57px;
-        right: -2000px;
-        transition: 0.6s;
-      }
-
-      .filter-page-show {
-        position: fixed;
-        top: 57px;
-        right: 147px;
-        transition: 0.6s;
-      }
-
-      #filterPage {
-        width: 178vh;
-      }
-
-      #filterPage .card {
-        height: 80vh;
-      }
-
-      @media screen and (max-width: 1024px) {
-        .filter-page-show {
-          right: 40px;
-        }
-
-        #filterPage {
-          width: 99vh;
-        }
+      .offcanvas.offcanvas-end {
+        width: 100%;
       }
     </style>
   </head>
 
   <body>
     <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <div class="row">
-            <div class="col-sm-10 sm-header-box">
-              <div class="card">
-                <div class="card-body">
-                  <span>10001234 : Example Transportt Co., Ltd.</span><br />
-                  <div class="d-flex justify-content-between">
-                    <span>Total Shipment : 3</span>
-                    <span>Filter : 3</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-2 sm-header-box">
-              <button class="btn sm-filter-btn" id="btnFilter">
-                <i class="fa fa-filter" aria-hidden="true"></i>
-              </button>
-            </div>
+      <div class="header-row">
+        <div class="header-box">
+          <div class="header-text">10001234 : Example Transport Co., Ltd.</div>
+          <div class="header-detail">
+            <span>Total Shipment: 4</span>
+            <span>Filter: 4</span>
           </div>
+        </div>
+        <div
+          class="filter-box"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasRight"
+          aria-controls="offcanvasRight"
+          id="btnFilter"
+        >
+          <i class="fa fa-filter" aria-hidden="true"></i>
         </div>
       </div>
 
-      <div class="row">
-        <div class="sm-box col-12 col-md-6" id="dvShipment">
-          <!-- <div class="card">
-            <div class="card-body">
-              <div class="sm-detail mb-2">
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">Shipment No.</p>
-                  <h5 class="card-title text-end">2024080505</h5>
-                </div>
+      <div class="row" id="dvShipment"></div>
 
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">Tender Date</p>
-                  <p class="card-text text-end">01/08/2024 11:34:45</p>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">TMS Description</p>
-                  <p class="card-text text-end">
-                    Test accept by queue 06082024
-                  </p>
-                </div>
-
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">Truck Type</p>
-                  <p class="card-text text-end">22CS</p>
-                </div>
-
-                <div class="d-flex justify-content-between mt-1">
-                  <select name="" id="" class="form-select text-center">
-                    <option value="" selected>--- เลือกพนักงานชับรถ ---</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <button class="btn btn-save">บันทึก</button>
-                </div>
-              </div>
-
-              <div class="dn-detail row collapse" id="collapse2024080505">
-                <div class="col-12 my-2">
-                  <div class="box-quene">
-                    <div class="d-flex justify-content-between">
-                      <label class="dn-number">No. 1</label>
-                      <div>
-                        <span class="card-subtitle">Delivery No.</span>
-                        <label class="card-title text-end">H2342482936</label>
-                      </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-calendar"></i></span
-                        >Plan load Date
-                      </p>
-                      <p class="card-text text-end">01/08/2024 11:34:45</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-circle-thin"></i></span
-                        >Origin
-                      </p>
-                      <p class="card-text text-end">โรงงาน ปูนฯผง-เขาวง</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-map-marker"></i></span
-                        >Destination
-                      </p>
-                      <p class="card-text text-end">บผว.หนองแคระพีพัฒน์</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-square"></i></span
-                        >Commodity
-                      </p>
-                      <p class="card-text text-end">BulkGrey</p>
-                    </div>
-                  </div>
-
-                  <hr />
-                  <div class="box-quene">
-                    <div class="d-flex justify-content-between">
-                      <label class="dn-number">No. 2</label>
-                      <div>
-                        <span class="card-subtitle">Delivery No.</span>
-                        <label class="card-title text-end">H2342482937</label>
-                      </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-calendar"></i></span
-                        >Plan load Date
-                      </p>
-                      <p class="card-text text-end">02/08/2024 11:20:00</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-circle-thin"></i></span
-                        >Origin
-                      </p>
-                      <p class="card-text text-end">โรงงานใหม่</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-map-marker"></i></span
-                        >Destination
-                      </p>
-                      <p class="card-text text-end">บผว.หนองแคระพีพัฒน์</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-square"></i></span
-                        >Commodity
-                      </p>
-                      <p class="card-text text-end">BulkGrey</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="card-footer"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapse2024080505"
-              aria-expanded="false"
-              aria-controls="collapse2024080505"
-            >
-              <label
-                ><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination
-                )</label
-              >
-              <span class="collapse-icon"></span>
-            </div>
-          </div> -->
+      <div
+        class="offcanvas offcanvas-end"
+        tabindex="-1"
+        id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel">Filter</h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
         </div>
-
-        <!-- <div class="sm-box col-12 col-sm-12 col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-        </div> -->
-      </div>
-
-      <div class="row filter-page-hide" id="filterPage">
-        <div class="sm-box col-6">
-          <div class="card">
-            <div class="card-body">
-              <h4>Filter</h4>
-            </div>
-          </div>
-        </div>
+        <div class="offcanvas-body">...</div>
       </div>
     </div>
 
@@ -499,21 +315,14 @@
         bildingSipment();
       });
 
-      $("#btnFilter").click(function () {
-        if ($("#filterPage").hasClass("filter-page-show")) {
-          $("#filterPage").attr("class", "row filter-page-hide");
-        } else {
-          $("#filterPage").attr("class", "row filter-page-show");
-        }
-      });
-
       function bildingSipment() {
         var html = "";
         if (dataList.length > 0) {
           for (let i = 0; i < dataList.length; i++) {
             const data = dataList[i];
 
-            html += `<div class="card mb-2">
+            html += `<div class="sm-box col-12 col-md-6">
+            <div class="card">
             <div class="card-body">
             <div class="sm-detail mb-2">
                 <div class="d-flex justify-content-between">
@@ -550,6 +359,7 @@
               </div>`;
 
             html += `<div class="dn-detail row collapse" id="collapse${data.shipmentNo}">`;
+
             html += bildingDn(data.items, data.shipmentNo);
 
             html += `</div></div><div
@@ -564,6 +374,7 @@
                 )</label
               >
               <span class="collapse-icon"></span>
+            </div>
             </div>
             </div>
           </div>`;
