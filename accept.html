@@ -46,19 +46,20 @@
             cursor: pointer;
             display: flex;
             justify-content: space-between;
+            padding: 5px 12px;
+            border: unset;
         }
 
-        .sm-box .card .card-footer .collapse-icon::before{
+        .sm-box .card .card-footer .collapse-icon::before {
             font: normal normal normal 14px / 1 FontAwesome;
             font-size: inherit;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
         }
-        
+
         .sm-box .card .card-footer[aria-expanded="false"] {
             background-color: #E2F0FF;
             color: #6D6D6D;
-            border: unset;
         }
 
         .sm-box .card .card-footer[aria-expanded="false"] .collapse-icon::before {
@@ -105,93 +106,225 @@
             margin-right: 5px;
         }
 
-        
+        .header-row {
+            margin: 10px -6px 0px -5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .header-box {
+            font-size: 14px;
+            padding: 2px 10px;
+            height: 45px;
+            width: calc(100% - 51px);
+            background-color: white;
+            border-radius: 7px;
+            overflow: hidden;
+        }
+
+        .header-text {
+            color: #000;
+            width: 100%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .header-detail {
+            display: flex;
+            justify-content: space-between;
+            color: #6D6D6D;
+        }
+
+        .filter-box {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 45px;
+            width: 45px;
+            background-color: #E2F0FF;
+            border-radius: 7px;
+            font-size: 22px;
+            color: #007AFF;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-11">
-                Carrier
-            </div>
-            <div class="col-1">
-                Filter
-            </div>
-        </div>
-        <div class="row">
-            <div class="sm-box col-12 col-sm-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="sm-detail row mb-2">
-                            <div class="col-5">
-                                <p class="card-subtitle">Shipment No.</p>
-                            </div>
-                            <div class="col-7">
-                                <h5 class="card-title text-end">2024080505</h5>
-                            </div>
-                            <div class="col-5">
-                                <p class="card-subtitle">Tender Date</p>
-                            </div>
-                            <div class="col-7">
-                                <p class="card-text text-end">01/08/2024 11:34:45</p>
-                            </div>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="display: none;">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                    type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-filter-tab" data-bs-toggle="pill" data-bs-target="#pills-filter"
+                    type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="header-row">
+                    <div class="header-box">
+                        <div class="header-text" title="Example Transport Co., Ltd.">
+                            10001234 : Example Transport Co., Ltd.
                         </div>
-
-                        <div class="dn-detail row collapse" id="collapse2024080505">
-                            <div class="col-12 my-2">
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label class="dn-number">No. 1</label>
+                        <div class="header-detail">
+                            <span>Total Shipment : 4</span>
+                            <span>Filter : 4</span>
+                        </div>
+                    </div>
+                    <div class="filter-box" id="btnFilter">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="sm-box col-12 col-sm-12 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="sm-detail row mb-2">
+                                    <div class="col-5">
+                                        <p class="card-subtitle">Shipment No.</p>
                                     </div>
-                                    <div class="col-9 text-end">
-                                        <span class="card-subtitle">Delivery No.</span><label
-                                            class="card-title text-end">H2342482936</label>
+                                    <div class="col-7">
+                                        <h5 class="card-title text-end">2024080505</h5>
                                     </div>
                                     <div class="col-5">
-                                        <p class="card-subtitle"><span class="card-icon"><i
-                                                    class="fa fa-calendar"></i></span>Plan load Date</p>
+                                        <p class="card-subtitle">Tender Date</p>
                                     </div>
                                     <div class="col-7">
                                         <p class="card-text text-end">01/08/2024 11:34:45</p>
                                     </div>
                                 </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-3">
-                                        <label class="dn-number">No. 2</label>
-                                    </div>
-                                    <div class="col-9 text-end">
-                                        <span class="card-subtitle">Delivery No.</span><label
-                                            class="card-title text-end">H2342482937</label>
-                                    </div>
-                                    <div class="col-5">
-                                        <p class="card-subtitle"> <span class="card-icon"><i
-                                                    class="fa fa-calendar"></i></span>Plan load Date</p>
-                                    </div>
-                                    <div class="col-7">
-                                        <p class="card-text text-end">01/08/2024 14:34:45</p>
+
+                                <div class="dn-detail row collapse" id="collapse2024080505">
+                                    <div class="col-12 my-2">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="dn-number">No. 1</label>
+                                            </div>
+                                            <div class="col-9 text-end">
+                                                <span class="card-subtitle">Delivery No.</span><label
+                                                    class="card-title text-end">H2342482936</label>
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="card-subtitle"><span class="card-icon"><i
+                                                            class="fa fa-calendar"></i></span>Plan load Date</p>
+                                            </div>
+                                            <div class="col-7">
+                                                <p class="card-text text-end">01/08/2024 11:34:45</p>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="dn-number">No. 2</label>
+                                            </div>
+                                            <div class="col-9 text-end">
+                                                <span class="card-subtitle">Delivery No.</span><label
+                                                    class="card-title text-end">H2342482937</label>
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="card-subtitle"> <span class="card-icon"><i
+                                                            class="fa fa-calendar"></i></span>Plan load Date</p>
+                                            </div>
+                                            <div class="col-7">
+                                                <p class="card-text text-end">01/08/2024 14:34:45</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-footer" data-bs-toggle="collapse" data-bs-target="#collapse2024080505"
+                                aria-expanded="false" aria-controls="collapse2024080505">
+                                <label><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination )</label>
+                                <span class="collapse-icon"></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer" data-bs-toggle="collapse" data-bs-target="#collapse2024080505"
-                        aria-expanded="false" aria-controls="collapse2024080505">
-                        <label><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination )</label>
-                        <span class="collapse-icon"></span>
+                    <div class="sm-box col-12 col-sm-12 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="sm-detail row mb-2">
+                                    <div class="col-5">
+                                        <p class="card-subtitle">Shipment No.</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <h5 class="card-title text-end">2024080506</h5>
+                                    </div>
+                                    <div class="col-5">
+                                        <p class="card-subtitle">Tender Date</p>
+                                    </div>
+                                    <div class="col-7">
+                                        <p class="card-text text-end">01/08/2024 11:34:45</p>
+                                    </div>
+                                </div>
+
+                                <div class="dn-detail row collapse" id="collapse2024080506">
+                                    <div class="col-12 my-2">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="dn-number">No. 1</label>
+                                            </div>
+                                            <div class="col-9 text-end">
+                                                <span class="card-subtitle">Delivery No.</span><label
+                                                    class="card-title text-end">H2342482938</label>
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="card-subtitle"><span class="card-icon"><i
+                                                            class="fa fa-calendar"></i></span>Plan load Date</p>
+                                            </div>
+                                            <div class="col-7">
+                                                <p class="card-text text-end">01/08/2024 11:34:45</p>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label class="dn-number">No. 2</label>
+                                            </div>
+                                            <div class="col-9 text-end">
+                                                <span class="card-subtitle">Delivery No.</span><label
+                                                    class="card-title text-end">H2342482939</label>
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="card-subtitle"> <span class="card-icon"><i
+                                                            class="fa fa-calendar"></i></span>Plan load Date</p>
+                                            </div>
+                                            <div class="col-7">
+                                                <p class="card-text text-end">01/08/2024 14:34:45</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer" data-bs-toggle="collapse" data-bs-target="#collapse2024080506"
+                                aria-expanded="false" aria-controls="collapse2024080506">
+                                <label><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination )</label>
+                                <span class="collapse-icon"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="sm-box col-12 col-sm-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+            <div class="tab-pane fade" id="pills-filter" role="tabpanel" aria-labelledby="pills-filter-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of
+                                    the card's content.</p>
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <button type="button" class="btn btn-secondary" id="btnCloseFilter">Close</button>
                     </div>
                 </div>
             </div>
@@ -200,7 +333,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-
+    <script>
+        $('#btnFilter').click(function () {
+            $('#pills-filter-tab').click();
+        });
+        $('#btnCloseFilter').click(function () {
+            $('#pills-home-tab').click();
+        });
+    </script>
 </body>
 
 </html>
