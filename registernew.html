@@ -299,6 +299,9 @@
         });
 
         $('#btnEdit').click(function () {
+            $('#txtCarrierEdit').val($('#lblCarrier').val());
+            $('#txtFullNameEdit').val($('#lblFullName').val());
+            $('#txtPhoneNumberEdit').val($('#lblPhoneNumber').val());
             $('#pills-edit-tab').click();
         });
 
