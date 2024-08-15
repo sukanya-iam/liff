@@ -97,6 +97,7 @@
         display: flex;
         justify-content: space-between;
         padding: 5px 12px;
+        border: unset;
       }
 
       .sm-box .card .card-footer .collapse-icon::before {
@@ -109,7 +110,6 @@
       .sm-box .card .card-footer[aria-expanded="false"] {
         background-color: #e2f0ff;
         color: #6d6d6d;
-        border: unset;
       }
 
       .sm-box .card .card-footer[aria-expanded="false"] .collapse-icon::before {
@@ -127,6 +127,12 @@
 
       .sm-box .card .card-footer[aria-expanded="true"] .card-text {
         color: white !important;
+      }
+
+      .title-text-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
 
       .dn-detail {
@@ -158,12 +164,14 @@
       }
 
       .btn-save {
-        border-color: #007aff;
+        border: 1px solid #007aff;
         color: #007aff;
         width: 25%;
         height: 32px;
         transition: 0.3s;
         font-size: 14px;
+        border-radius: 7px;
+        background-color: #ffff;
       }
 
       .btn-save:hover {
@@ -312,135 +320,134 @@
       ];
 
       $(document).ready(function () {
-        bildingSipment();
+        bindingShipment();
       });
 
-      function bildingSipment() {
+      function bindingShipment() {
         var html = "";
         if (dataList.length > 0) {
           for (let i = 0; i < dataList.length; i++) {
             const data = dataList[i];
 
             html += `<div class="sm-box col-12 col-md-6">
-            <div class="card">
-            <div class="card-body">
-            <div class="sm-detail mb-2">
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">Shipment No.</p>
-                  <h5 class="card-title text-end">${data.shipmentNo}</h5>
-                </div>
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="sm-detail mb-2">
+                              <div class="title-text-box">
+                                <p class="card-subtitle">Shipment No.</p>
+                                <h5 class="card-title text-end">${data.shipmentNo}</h5>
+                              </div>
 
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">Tender Date</p>
-                  <p class="card-text text-end">${data.tenderDate}</p>
-                </div>
+                              <div class="title-text-box">
+                                <p class="card-subtitle">Tender Date</p>
+                                <p class="card-text text-end">${data.tenderDate}</p>
+                              </div>
 
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">TMS Description</p>
-                  <p class="card-text text-end">
-                  ${data.description}
-                  </p>
-                </div>
+                              <div class="title-text-box">
+                                <p class="card-subtitle">TMS Description</p>
+                                <p class="card-text text-end">
+                                ${data.description}
+                                </p>
+                              </div>
 
-                <div class="d-flex justify-content-between">
-                  <p class="card-subtitle">Truck Type</p>
-                  <p class="card-text text-end">${data.truckType}</p>
-                </div>
+                              <div class="title-text-box">
+                                <p class="card-subtitle">Truck Type</p>
+                                <p class="card-text text-end">${data.truckType}</p>
+                              </div>
 
-                <div class="d-flex justify-content-between mt-1">
-                  <select name="" id="" class="form-select text-center">
-                    <option value="" selected>--- เลือกพนักงานชับรถ ---</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                  </select>
-                  <button class="btn btn-save">บันทึก</button>
-                </div>
-              </div>`;
+                              <div class="title-text-box mt-1">
+                                <select name="" id="" class="form-select text-center">
+                                  <option value="" selected>--- เลือกพนักงานชับรถ ---</option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                                <button class="btn-save">บันทึก</button>
+                              </div>
+                            </div>`;
 
             html += `<div class="dn-detail row collapse" id="collapse${data.shipmentNo}">`;
 
-            html += bildingDn(data.items, data.shipmentNo);
+            html += bindingDn(data.items, data.shipmentNo);
 
             html += `</div></div><div
-              class="card-footer"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapse${data.shipmentNo}"
-              aria-expanded="false"
-              aria-controls="collapse${data.shipmentNo}"
-            >
-              <label
-                ><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination
-                )</label
-              >
-              <span class="collapse-icon"></span>
-            </div>
-            </div>
-            </div>
-          </div>`;
+                        class="card-footer"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse${data.shipmentNo}"
+                        aria-expanded="false"
+                        aria-controls="collapse${data.shipmentNo}"
+                      >
+                        <label
+                          ><span class="card-text">2 Jobs</span> ( 2 Origins 1 Destination
+                          )</label
+                        >
+                        <span class="collapse-icon"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>`;
           }
 
           $("#dvShipment").append(html);
         }
       }
 
-      function bildingDn(dataDn, sm) {
+      function bindingDn(dataDn, sm) {
         var html = "";
 
         if (dataDn.length > 0) {
           for (let i = 0; i < dataDn.length; i++) {
             const data = dataDn[i];
 
-            html += `
-                <div class="col-12 my-2">
-                  <div class="box-quene">
-                    <div class="d-flex justify-content-between">
-                      <label class="dn-number">No. ${i + 1}</label>
-                      <div>
-                        <span class="card-subtitle">Delivery No.</span>
-                        <label class="card-title text-end">${
-                          data.deliveryNo
-                        }</label>
+            html += `<div class="col-12 my-2">
+                      <div class="box-quene">
+                        <div class="title-text-box">
+                          <label class="dn-number">No. ${i + 1}</label>
+                          <div>
+                            <span class="card-subtitle">Delivery No.</span>
+                            <label class="card-title text-end">${
+                              data.deliveryNo
+                            }</label>
+                          </div>
+                        </div>
+
+                        <div class="title-text-box">
+                          <p class="card-subtitle">
+                            <span class="card-icon"
+                              ><i class="fa fa-calendar"></i></span
+                            >Plan load Date
+                          </p>
+                          <p class="card-text text-end">${data.planLoadDate}</p>
+                        </div>
+
+                        <div class="title-text-box">
+                          <p class="card-subtitle">
+                            <span class="card-icon"
+                              ><i class="fa fa-circle-thin"></i></span
+                            >Origin
+                          </p>
+                          <p class="card-text text-end">${data.origin}</p>
+                        </div>
+
+                        <div class="title-text-box">
+                          <p class="card-subtitle">
+                            <span class="card-icon"
+                              ><i class="fa fa-map-marker"></i></span
+                            >Destination
+                          </p>
+                          <p class="card-text text-end">${data.destination}</p>
+                        </div>
+
+                        <div class="title-text-box">
+                          <p class="card-subtitle">
+                            <span class="card-icon"
+                              ><i class="fa fa-square"></i></span
+                            >Commodity
+                          </p>
+                          <p class="card-text text-end">${data.commodity}</p>
+                        </div>
                       </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-calendar"></i></span
-                        >Plan load Date
-                      </p>
-                      <p class="card-text text-end">${data.planLoadDate}</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-circle-thin"></i></span
-                        >Origin
-                      </p>
-                      <p class="card-text text-end">${data.origin}</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-map-marker"></i></span
-                        >Destination
-                      </p>
-                      <p class="card-text text-end">${data.destination}</p>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                      <p class="card-subtitle">
-                        <span class="card-icon"
-                          ><i class="fa fa-square"></i></span
-                        >Commodity
-                      </p>
-                      <p class="card-text text-end">${data.commodity}</p>
-                    </div>
-                  </div>
-                  </div>`;
+                    </div>`;
 
             if (i != dataDn.length - 1) {
               html += `<div class="col-12"><hr class="m-0"/></div>`;
