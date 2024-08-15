@@ -179,6 +179,23 @@
         color: #fff;
       }
 
+      .btn-back-to-top {
+        border: 1px solid #e2f0ff;
+        color: #007aff;
+        height: 32px;
+        transition: 0.3s;
+        font-size: 14px;
+        border-radius: 7px;
+        background-color: #e2f0ff;
+        padding: 5px 22px;
+      }
+
+      .btn-back-to-top:hover {
+        border: 1px solid #ffff;
+        color: #007aff;
+        background-color: #ffff;
+      }
+
       #dvShipment .form-select {
         width: 73%;
         font-size: 14px;
@@ -195,7 +212,7 @@
       }
 
       .offcanvas.offcanvas-end {
-        width: 100%;
+        width: 90%;
       }
     </style>
   </head>
@@ -206,7 +223,7 @@
         <div class="header-box">
           <div class="header-text">10001234 : Example Transport Co., Ltd.</div>
           <div class="header-detail">
-            <span>Total Shipment: 4</span>
+            <span id="txtTotalShipment">Total Shipment: 4</span>
             <span>Filter: 4</span>
           </div>
         </div>
@@ -223,6 +240,15 @@
       </div>
 
       <div class="row" id="dvShipment"></div>
+
+      <div class="row">
+        <div class="sm-box col-12 text-end">
+          <button class="btn-back-to-top mt-1" id="btnBackToTop">
+            <span class="me-2">กลับด้านบน</span>
+            <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
 
       <div
         class="offcanvas offcanvas-end"
@@ -318,15 +344,87 @@
             },
           ],
         },
+        {
+          shipmentNo: "2024080512",
+          tenderDate: "01/08/2024 13:34:45",
+          description: "Test accept by queue 06082024",
+          truckType: "22CS",
+          items: [
+            {
+              deliveryNo: "H2342482936",
+              planLoadDate: "02/08/2024 08:00:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+            {
+              deliveryNo: "H2342482937",
+              planLoadDate: "02/08/2024 11:20:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+          ],
+        },
+        {
+          shipmentNo: "2024080520",
+          tenderDate: "01/08/2024 13:34:45",
+          description: "Test accept by queue 06082024",
+          truckType: "22CS",
+          items: [
+            {
+              deliveryNo: "H2342482936",
+              planLoadDate: "02/08/2024 08:00:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+            {
+              deliveryNo: "H2342482937",
+              planLoadDate: "02/08/2024 11:20:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+          ],
+        },
+        {
+          shipmentNo: "2024080522",
+          tenderDate: "01/08/2024 13:34:45",
+          description: "Test accept by queue 06082024",
+          truckType: "22CS",
+          items: [
+            {
+              deliveryNo: "H2342482936",
+              planLoadDate: "02/08/2024 08:00:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+            {
+              deliveryNo: "H2342482937",
+              planLoadDate: "02/08/2024 11:20:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+          ],
+        },
       ];
 
       $(document).ready(function () {
         bindingShipment();
       });
 
+      $("#btnBackToTop").click(function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
       function bindingShipment() {
         var html = "";
         if (dataList.length > 0) {
+          $("#txtTotalShipment").text("Total Shipment: " + dataList.length);
+
           for (let i = 0; i < dataList.length; i++) {
             const data = dataList[i];
 
