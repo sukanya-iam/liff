@@ -27,8 +27,8 @@
 
         .register-box .col-form-label {
             color: #01064A;
-            font-size: 14px;
             margin-top: 1px;
+            font-size: 14px;
         }
 
         .btn {
@@ -120,6 +120,10 @@
         .btn-action div.col-6:last-child {
             padding-left: 5px;
         }
+
+        .carrier-info{
+            display: none;
+        }
     </style>
 </head>
 
@@ -150,21 +154,21 @@
                                 <h4 class="card-title">Registration</h4>
                             </div>
                         </div>
-                        <div class="row">
-                            <label for="txtCarrier" class="col-5 col-form-label">Carrier Name</label>
-                            <div class="col-7">
+                        <div class="row carrier-info">
+                            <label for="txtCarrier" class="col-4 col-form-label">Carrier</label>
+                            <div class="col-8">
                                 <input type="text" class="form-control" id="txtCarrier">
                             </div>
                         </div>
                         <div class="row">
-                            <label for="txtFullName" class="col-5 col-form-label">Full Name</label>
-                            <div class="col-7">
+                            <label for="txtFullName" class="col-4 col-form-label">Full Name</label>
+                            <div class="col-8">
                                 <input type="text" class="form-control" id="txtFullName">
                             </div>
                         </div>
                         <div class="row">
-                            <label for="txtPhoneNumber" class="col-5 col-form-label">Phone Number</label>
-                            <div class="col-7">
+                            <label for="txtPhoneNumber" class="col-4 col-form-label">Phone</label>
+                            <div class="col-8">
                                 <input type="text" class="form-control" id="txtPhoneNumber">
                             </div>
                         </div>
@@ -190,23 +194,23 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="row">
-                            <label for="lblCarrier" class="col-5 col-form-label">Carrier Name</label>
-                            <div class="col-7">
+                        <div class="row carrier-info">
+                            <label for="lblCarrier" class="col-4 col-form-label">Carrier</label>
+                            <div class="col-8">
                                 <input type="text" readonly class="form-control-plaintext" id="lblCarrier"
                                     value="สุวรรณวงศ์">
                             </div>
                         </div>
                         <div class="row">
-                            <label for="lblFullName" class="col-5 col-form-label">Full Name</label>
-                            <div class="col-7">
+                            <label for="lblFullName" class="col-4 col-form-label">Full Name</label>
+                            <div class="col-8">
                                 <input type="text" readonly class="form-control-plaintext" id="lblFullName"
                                     value="กาญจน์ สุพรรณภาคิน">
                             </div>
                         </div>
                         <div class="row">
-                            <label for="lblPhoneNumber" class="col-5 col-form-label">Phone Number</label>
-                            <div class="col-7">
+                            <label for="lblPhoneNumber" class="col-4 col-form-label">Phone</label>
+                            <div class="col-8">
                                 <input type="text" class="form-control-plaintext" id="lblPhoneNumber"
                                     value="0812345689">
                             </div>
@@ -227,21 +231,21 @@
                                 <h4 class="card-title">Edit Registration</h4>
                             </div>
                         </div>
-                        <div class="row">
-                            <label for="txtCarrierEdit" class="col-5 col-form-label">Carrier Name</label>
-                            <div class="col-7">
+                        <div class="row carrier-info">
+                            <label for="txtCarrierEdit" class="col-4 col-form-label">Carrier</label>
+                            <div class="col-8">
                                 <input type="text" class="form-control" id="txtCarrierEdit">
                             </div>
                         </div>
                         <div class="row">
-                            <label for="txtFullNameEdit" class="col-5 col-form-label">Full Name</label>
-                            <div class="col-7">
+                            <label for="txtFullNameEdit" class="col-4 col-form-label">Full Name</label>
+                            <div class="col-8">
                                 <input type="text" class="form-control" id="txtFullNameEdit">
                             </div>
                         </div>
                         <div class="row">
-                            <label for="txtPhoneNumberEdit" class="col-5 col-form-label">Phone Number</label>
-                            <div class="col-7">
+                            <label for="txtPhoneNumberEdit" class="col-4 col-form-label">Phone</label>
+                            <div class="col-8">
                                 <input type="text" class="form-control" id="txtPhoneNumberEdit">
                             </div>
                         </div>
@@ -264,7 +268,7 @@
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
         var userInfo = {
-            CarrierName: "สุวรรณวงศ์",
+            Carrier: "สุวรรณวงศ์",
             FullName: "กาญจน์ สุพรรณภาคิน",
             PhoneNumber: "0812345689"
         };
@@ -291,7 +295,7 @@
 
         $('#btnRegister').click(function () {
             var user = {
-                CarrierName: $('#txtCarrier').val(),
+                Carrier: $('#txtCarrier').val(),
                 FullName: $('#txtFullName').val(),
                 PhoneNumber: $('#txtPhoneNumber').val()
             };
@@ -312,7 +316,7 @@
 
         $('#btnSubmitEdit').click(function () {
             var user = {
-                CarrierName: $('#txtCarrierEdit').val(),
+                Carrier: $('#txtCarrierEdit').val(),
                 FullName: $('#txtFullNameEdit').val(),
                 PhoneNumber: $('#txtPhoneNumberEdit').val()
             };
@@ -320,7 +324,9 @@
         });
 
         function saveUser(user) {
-            if (user.CarrierName == "" || user.FullName == "" || user.PhoneNumber == "") {
+            //.caarier-in fo display none
+            //if (user.CarrierName == "" || user.FullName == "" || user.PhoneNumber == "") {
+            if (user.FullName == "" || user.PhoneNumber == "") {
                 if (!$('.alert').is(':visible')) {
                     $('.container').prepend(` <div class="alert alert-warning alert-dismissible fade show" role="alert" id="msgAlert">
                                             <strong>Warning!</strong> Please, fill out every field.
@@ -329,7 +335,7 @@
                 }
             } else {
                 //ajax save
-                $('#lblCarrier').val(user.CarrierName);
+                $('#lblCarrier').val(user.Carrier);
                 $('#lblFullName').val(user.FullName);
                 $('#lblPhoneNumber').val(user.PhoneNumber);
                 $('#pills-readonly-tab').click();
