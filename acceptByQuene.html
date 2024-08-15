@@ -170,6 +170,7 @@
         height: 32px;
         transition: 0.3s;
         font-size: 14px;
+        font-weight: 400;
         border-radius: 7px;
         background-color: #ffff;
       }
@@ -180,20 +181,52 @@
       }
 
       .btn-back-to-top {
-        border: 1px solid #e2f0ff;
+        border: 0px solid #e2f0ff;
         color: #007aff;
         height: 32px;
         transition: 0.3s;
         font-size: 14px;
+        font-weight: 400;
         border-radius: 7px;
-        background-color: #e2f0ff;
         padding: 5px 22px;
+        background-color: #e2f0ff;
       }
 
       .btn-back-to-top:hover {
-        border: 1px solid #ffff;
-        color: #007aff;
         background-color: #ffff;
+        color: #007aff;
+      }
+
+      .btn-reset {
+        border: 1px solid #000;
+        height: 32px;
+        transition: 0.3s;
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 7px;
+        padding: 5px 22px;
+        background-color: #ffff;
+      }
+
+      .btn-reset:hover {
+        background-color: #d2d2d2;
+      }
+
+      .btn-submit {
+        border: 0px solid #000;
+        height: 32px;
+        transition: 0.3s;
+        font-size: 14px;
+        font-weight: 400;
+        border-radius: 7px;
+        padding: 5px 22px;
+        background-color: #ffede1;
+        color: #ff8800;
+      }
+
+      .btn-submit:hover {
+        background-color: #ff8800;
+        color: #ffede1;
       }
 
       #dvShipment .form-select {
@@ -213,6 +246,22 @@
 
       .offcanvas.offcanvas-end {
         width: 90%;
+      }
+
+      .offcanvas-body label {
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .offcanvas-footer {
+        padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
+      }
+
+      .hearder-search-filter {
+        border-radius: 0 0 50px 0;
+        background-color: #e2f0ff;
+        color: #007aff;
+        width: 230px;
       }
     </style>
   </head>
@@ -242,8 +291,8 @@
       <div class="row" id="dvShipment"></div>
 
       <div class="row">
-        <div class="sm-box col-12 text-end">
-          <button class="btn-back-to-top mt-1" id="btnBackToTop">
+        <div class="sm-box col-12 text-end mt-2 mb-3">
+          <button class="btn-back-to-top" id="btnBackToTop">
             <span class="me-2">กลับด้านบน</span>
             <i class="fa fa-angle-double-up" aria-hidden="true"></i>
           </button>
@@ -256,16 +305,32 @@
         id="offcanvasRight"
         aria-labelledby="offcanvasRightLabel"
       >
-        <div class="offcanvas-header">
-          <h5 id="offcanvasRightLabel">Filter</h5>
-          <button
-            type="button"
-            class="btn-close text-reset"
-            data-bs-dismiss="offcanvas"
-            aria-label="Close"
-          ></button>
+        <div class="offcanvas-header hearder-search-filter">
+          <h5 id="offcanvasRightLabel" class="m-0">
+            <i class="fa fa-filter me-2" aria-hidden="true"></i>Filter
+          </h5>
         </div>
-        <div class="offcanvas-body">...</div>
+        <div class="offcanvas-body">
+          <div class="row">
+            <div class="col-12">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Shipment No</label
+              >
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <div class="offcanvas-footer">
+          <div class="row">
+            <div class="col-6">
+              <button class="btn-reset w-100">Reset</button>
+            </div>
+            <div class="col-6">
+              <button class="btn-submit w-100">Submit</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
