@@ -310,6 +310,14 @@
           <h5 id="offcanvasRightLabel" class="m-0">
             <i class="fa fa-filter me-2" aria-hidden="true"></i>Filter
           </h5>
+          <button
+            type="button"
+            id="btnCloseOffcanvas"
+            style="display: none"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="offcanvas-body">
           <div class="row">
@@ -319,6 +327,7 @@
                 type="text"
                 class="form-control"
                 placeholder="DD/MM/YYYY"
+                id="tenderDate"
               />
             </div>
 
@@ -365,10 +374,10 @@
         <div class="offcanvas-footer">
           <div class="row">
             <div class="col-6">
-              <button class="btn-reset w-100">Reset</button>
+              <button class="btn-reset w-100" id="btnReset">Reset</button>
             </div>
             <div class="col-6">
-              <button class="btn-submit w-100">Submit</button>
+              <button class="btn-submit w-100" id="btnSubmit">Submit</button>
             </div>
           </div>
         </div>
@@ -544,6 +553,16 @@
         bindingShipment();
         searchTruckType();
         searchShipmentNo();
+      });
+
+      $("#btnSubmit").click(function () {
+        $("#btnCloseOffcanvas").click();
+      });
+
+      $("#btnReset").click(function () {
+        $(
+          "#tenderDate, #truckType, #loadTracking, #shipmentNo, #origin, #destinations"
+        ).val("");
       });
 
       $("#btnBackToTop").click(function () {
