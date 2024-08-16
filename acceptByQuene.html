@@ -346,6 +346,8 @@
               <label class="form-label">Origin</label>
               <select id="origin" class="form-select">
                 <option value="" selected>All</option>
+                <option value="1">โรงงาน ปูนฯผง-เขาวง</option>
+                <option value="2">โรงงาน ปูน ลพบุรี</option>
               </select>
             </div>
 
@@ -353,6 +355,7 @@
               <label class="form-label">Destinations</label>
               <select id="destinations" class="form-select">
                 <option value="" selected>All</option>
+                <option value="1">บผว.หนองแคระพีพัฒน์</option>
               </select>
             </div>
           </div>
@@ -406,7 +409,7 @@
           shipmentNo: "2024080509",
           tenderDate: "01/08/2024 13:34:45",
           description: "Test accept by queue 06082024",
-          truckType: "22CS",
+          truckType: "24CS",
           items: [
             {
               deliveryNo: "H2342482936",
@@ -428,7 +431,7 @@
           shipmentNo: "2024080511",
           tenderDate: "01/08/2024 13:34:45",
           description: "Test accept by queue 06082024",
-          truckType: "22CS",
+          truckType: "21CS",
           items: [
             {
               deliveryNo: "H2342482936",
@@ -512,6 +515,28 @@
             },
           ],
         },
+        {
+          shipmentNo: "2024080501",
+          tenderDate: "01/08/2024 13:34:45",
+          description: "Test accept by queue 06082024",
+          truckType: "22CS",
+          items: [
+            {
+              deliveryNo: "H2342482936",
+              planLoadDate: "02/08/2024 08:00:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+            {
+              deliveryNo: "H2342482932",
+              planLoadDate: "02/08/2024 11:20:00",
+              origin: "โรงงาน ปูนฯผง-เขาวง",
+              destination: "บผว.หนองแคระพีพัฒน์",
+              commodity: "BulkGrey",
+            },
+          ],
+        },
       ];
 
       $(document).ready(function () {
@@ -527,11 +552,17 @@
       function searchTruckType() {
         if (dataList.length > 0) {
           var html = "";
+          var data = [];
 
-          for (let i = 0; i < dataList.length; i++) {
-            const data = dataList[i];
+          data = dataList.filter(
+            (value, index, self) =>
+              index === self.findIndex((t) => t.truckType === value.truckType)
+          );
 
-            html += `<option value="${i + 1}">${data.truckType}</option>`;
+          data = data.sort((a, b) => a.truckType.localeCompare(b.truckType));
+
+          for (let i = 0; i < data.length; i++) {
+            html += `<option value="${i + 1}">${data[i].truckType}</option>`;
           }
 
           $("#truckType").append(html);
@@ -543,7 +574,11 @@
           var html = "";
 
           for (let i = 0; i < dataList.length; i++) {
-            const data = dataList[i];
+            var data = dataList.sort((a, b) =>
+              a.shipmentNo.localeCompare(b.shipmentNo)
+            );
+
+            data = data[i];
 
             html += `<option value="${i + 1}">${data.shipmentNo}</option>`;
           }
@@ -558,7 +593,11 @@
           $("#txtTotalShipment").text("Total Shipment: " + dataList.length);
 
           for (let i = 0; i < dataList.length; i++) {
-            const data = dataList[i];
+            var data = dataList.sort((a, b) =>
+              a.shipmentNo.localeCompare(b.shipmentNo)
+            );
+
+            data = data[i];
 
             html += `<div class="sm-box col-12 col-md-6">
                       <div class="card">
@@ -631,7 +670,11 @@
 
         if (dataDn.length > 0) {
           for (let i = 0; i < dataDn.length; i++) {
-            const data = dataDn[i];
+            var data = dataDn.sort((a, b) =>
+              a.deliveryNo.localeCompare(b.deliveryNo)
+            );
+
+            data = data[i];
 
             html += `<div class="col-12 my-2">
                       <div class="box-quene">
