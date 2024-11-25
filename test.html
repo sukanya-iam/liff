@@ -14,6 +14,8 @@
 
     <h4 style="color: red;" id="errorMsg"></h4>
     <hr>
+    <button id="btnLogIn" onclick="logIn()">Log In</button>
+    <hr>
     <h3 class="head-info">Get Environment</h3>
     <p id="os"><b>OS:</b> </p>
     <p id="language"><b>Language:</b> </p>
@@ -66,7 +68,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('V50');
+            $('#spVersion').text('V51');
             await liff
                 .init({
                     liffId: "2004905818-GWp40RQz", 
@@ -189,6 +191,22 @@
         }
 
         async function shareMsg() {
+        }
+
+        async function logIn() {
+            await liff
+                .init({
+                    liffId: "2004905818-GWp40RQz", 
+                    withLoginOnExternalBrowser: true
+                })
+                .then(() => {
+                    liff.login();
+
+                })
+                .catch((err) => {
+                    // Error happens during initialization
+                    $('#errorMsg').text("log in , " + err.code + " : " + err.message);
+                });
         }
 
         function logOut() {
