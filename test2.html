@@ -15,6 +15,9 @@
     <h4 style="color: red;" id="errorMsg"></h4>
     <hr>
 
+    <h4 style="color: orange;" id="txtLogIn"></h4>
+    <hr>
+
     <h3 class="head-info">Get Environment</h3>
     <p id="os"><b>OS:</b> </p>
     <p id="language"><b>Language:</b> </p>
@@ -67,7 +70,7 @@
         var userProfile = null;
 
         async function main() {
-            $('#spVersion').text('Test2 V1');
+            $('#spVersion').text('Test2 V2');
             await liff
                 .init({
                     liffId: "2004905818-plNx2WM4", 
@@ -89,11 +92,12 @@
                         //     .catch((err) => {
                         //         $('#errorMsg').text("getProfile() is error , " + err);
                         //     });
-
+                        $('#txtLogIn').text("login1");
                         getEnvironment();
                         getUserProfile();
                         getContext();
                     } else {
+                        $('#txtLogIn').text("login2");
                         liff.login();
                     }
 
